@@ -1,0 +1,35 @@
+# === Django & Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+ENV/
+.env
+db.sqlite3
+media/
+medlex_old/
+
+# === Angular & Node.js ===
+node_modules/
+.angular/
+dist/
+tmp/
+/src/environments/environment.development.ts
+/src/environments/environment.ts
+
+# === IDEs and Editors ===
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# === OS specific files ===
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Thumbs.db
