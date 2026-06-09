@@ -26,7 +26,7 @@ A Django REST API backend for medical professionals. Built to serve Angular (or 
 ```bash
 # 1. Clone the repository
 git clone <repo-url>
-cd medlex_fixed
+cd medlex
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -45,7 +45,7 @@ The API will be available at `http://127.0.0.1:8000`.
 ## Project Structure
 
 ```
-medlex_fixed/
+medlex/
 ├── manage.py
 ├── requirements.txt
 ├── db.sqlite3
