@@ -34,6 +34,7 @@ h1 {
 
 h2 {
   font-size: var(--font-size-2xl);
+  line-height: 98%;
 }
 
 h3 {
@@ -42,6 +43,7 @@ h3 {
 
 h4 {
   font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
 }
 
 img,
