@@ -1,17 +1,14 @@
 from django.urls import path
 from accounts.views import (
-    register_view,
-    profile_view,
-    profile_update_view,
-    google_auth_view,
+    register_view, profile_view, profile_update_view,
+    profile_extended_view, completed_cases_view, google_auth_view,
 )
 
 urlpatterns = [
-    # Auth
-    path('register/', register_view, name='api_register'),
-    path('auth/google/', google_auth_view, name='api_google_auth'),
-
-    # Profile
-    path('profile/', profile_view, name='api_profile'),
-    path('profile/update/', profile_update_view, name='api_profile_update'),
+    path('register/',               register_view,           name='api_register'),
+    path('auth/google/',            google_auth_view,        name='api_google_auth'),
+    path('profile/',                profile_view,            name='api_profile'),
+    path('profile/update/',         profile_update_view,     name='api_profile_update'),
+    path('profile/extended/',       profile_extended_view,   name='api_profile_extended'),
+    path('profile/cases/',          completed_cases_view,    name='api_completed_cases'),
 ]

@@ -9,7 +9,6 @@ ENV/
 .env
 db.sqlite3
 media/
-medlex_old/
 
 # === Angular & Node.js ===
 node_modules/
@@ -33,3 +32,6 @@ tmp/
 .DS_Store?
 ehthumbs.db
 Thumbs.db
+
+# === Miscellaneous ===
+additional_info.txt
