@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 
     # Local
     'accounts',
+    'cases',
 ]
 
 # ── Middleware ─────────────────────────────────────────────────────────────────
@@ -85,7 +86,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # ── Internationalisation ──────────────────────────────────────────────────────
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru' # LANGUAGE_CODE = 'en-us' by default
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
