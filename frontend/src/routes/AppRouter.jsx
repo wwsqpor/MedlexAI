@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
     Component: RootLayout,
     children: [
       {
-        inedx: true,
+        index: true,
         Component: HomeRedirect
       },
       {

@@ -91,7 +91,8 @@ export default function RegisterForm() {
       password: credentials.password
     }
     if (!registerResult.error) {
-      const loginResult = await dispatch(login({ loginCredentials }))
+      console.log(loginCredentials)
+      const loginResult = await dispatch(login({ credentials: loginCredentials, rememberMe: false }))
       
       console.log("Login result: ", loginResult)
 
