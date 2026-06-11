@@ -1,7 +1,5 @@
 # MedLex
 
-A Django REST API backend for medical professionals. Built to serve Angular (or any SPA) frontend — no HTML templates, pure JSON over HTTP with JWT authentication.
-
 ---
 
 ## Features
@@ -31,37 +29,19 @@ cd medlex
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Apply database migrations
+# 3. Make database migrations
+python manage.py makemigrations
+
+# 4. Apply database migrations
 python manage.py migrate
 
-# 4. Start the development server
+# 5. Start the development server
 python manage.py runserver
 ```
 
 The API will be available at `http://127.0.0.1:8000`.
 
 ---
-
-## Project Structure
-
-```
-medlex/
-├── manage.py
-├── requirements.txt
-├── db.sqlite3
-├── medlex/                   # Project configuration
-│   ├── settings.py
-│   ├── urls.py
-│   ├── asgi.py
-│   └── wsgi.py
-└── accounts/                 # User accounts app
-    ├── models.py             # Custom User model
-    ├── serializers.py        # RegisterSerializer, ProfileSerializer
-    ├── urls.py               # Account-specific routes
-    ├── admin.py
-    └── views/
-        └── views.py          # register, profile, google_auth
-```
 
 ---
 
@@ -74,6 +54,7 @@ medlex/
 | `POST` | `/api/token/refresh/` | None | Refresh access token |
 | `POST` | `/api/accounts/auth/google/` | None | Google Sign-In |
 | `GET` | `/api/accounts/profile/` | Bearer | Get current user profile |
+| `GET` | `/api/accounts/profile/extended` | Bearer | Get current user extended profile |
 | `PATCH` | `/api/accounts/profile/update/` | Bearer | Partial profile update |
 | `PUT` | `/api/accounts/profile/update/` | Bearer | Full profile update |
 
@@ -127,27 +108,6 @@ Configured in `settings.py` under `SIMPLE_JWT`:
 
 ---
 
-## Frontend Integration (Angular)
-
-Add an HTTP interceptor to attach the token to every request:
-
-```typescript
-// auth.interceptor.ts
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = inject(AuthService).getAccessToken();
-  if (token) {
-    req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
-  }
-  return next(req);
-};
-```
-
-Register it in `app.config.ts`:
-
-```typescript
-provideHttpClient(withInterceptors([authInterceptor]))
-```
-
 ---
 
 ## Production Checklist
@@ -162,14 +122,3 @@ provideHttpClient(withInterceptors([authInterceptor]))
 - [ ] Enable HTTPS and update `CORS_ALLOWED_ORIGINS` accordingly
 
 ---
-
-## Dependencies
-
-```
-Django>=5.0
-djangorestframework>=3.15
-djangorestframework-simplejwt>=5.3
-django-cors-headers>=4.3
-django-allauth>=0.63
-google-auth>=2.29
-```
