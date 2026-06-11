@@ -16,6 +16,11 @@
   opacity: 0.67;
 }
 
+.btn:active {
+  scale: 0.99;
+  opacity: 0.9;
+}
+
 .btn-icon {
   width: 1.75rem;
   aspect-ratio: 1;

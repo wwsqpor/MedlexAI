@@ -124,3 +124,41 @@ label[for="remember-me"] > .form-input {
 .google-sign-btn:hover {
   opacity: 1;
 }
+
+.form-nav-link {
+  /* border: 1px solid black;  */
+  width: 100%;
+  padding-bottom: 2px;
+  display: block;
+  text-align: center;
+
+}
+
+.form-nav-link.active {
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.bottom-nav {
+  /* width: 100%; */
+  font-size: var(--font-size-sm);
+  display: flex;
+  gap: var(--space-3);
+  /* justify-content: space-between; */
+  /* justify-content: center; */
+}
+
+.bottom-nav__have-account {
+  color: var(--color-text-secondary);
+}
+
+.error {
+  background-color: var(--color-warning-secondary);
+  color: var(--color-warning-primary);
+  padding: var(--space-2);
+  border-radius: var(--border-radius-md);
+}
+
+.validation-error {
+  color: var(--color-warning-primary);
+  font-weight: var(--font-weight-regular);
+}

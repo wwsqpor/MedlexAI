@@ -144,10 +144,10 @@ SIMPLE_JWT = {
 }
 
 # ── CORS ───────────────────────────────────────────────────────────────────────
-# Allow Angular dev server (port 4200) and any other SPA origin.
+# Allow React dev server (port 3000)
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4200',
-    'http://127.0.0.1:4200',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
 ]
 # Allow cookies / auth headers to be sent cross-origin (needed for JWT in headers)
 CORS_ALLOW_CREDENTIALS = True
