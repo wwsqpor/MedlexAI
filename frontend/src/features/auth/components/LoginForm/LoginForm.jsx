@@ -1,22 +1,34 @@
 import { useState } from "react";
 import { useNavigate, NavLink, Link } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google"
+// import { useGoogleLogin } from "@react-oauth/google"
 
 import { useAuth } from "../../useAuth";
 import { useAppDispatch } from "../../../../app/hooks";
-import { login } from "../../authThunks";
+import { login, googleLogin } from "../../authThunks";
 
 import Button from '../../../../components/Button/Button'
 import './LoginForm.css'
-import googleIcon from '../../../../assets/icons/google-g-logo-icon.svg'
+// import googleIcon from '../../../../assets/icons/google-g-logo-icon.svg'
 
 
 export default function LoginForm() {
 
+  const navigate = useNavigate() 
+  // const handleGoogleLogin = useGoogleLogin({
+  //   onSuccess: async (response) => {
+  //     await dispatch(googleLogin({ 
+  //     credential: response.access_token,
+  //     rememberMe: true
+  //   }))
+  //   console.log(response);
+  // },
+  //   onError: (error) => console.error(error)
+  // })
+
   const { isLoading, error } = useAuth();
   const dispatch = useAppDispatch();
   
-  const navigate = useNavigate() 
-
   const [rememberMe, setRememberMe] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
@@ -100,7 +112,28 @@ export default function LoginForm() {
         <div className="br-line"></div>
       </div>
 
-      <Button className="google-sign-btn" icon={googleIcon}>Войти через Google</Button>
+      {/* <Button 
+        onClick={() => handleGoogleLogin()}
+        className="google-sign-btn" 
+        icon={googleIcon}
+      >
+        Войти через Google
+      </Button> */}
+      <GoogleLogin
+        className="google-auth-btn"
+        onSuccess={async (response) => {
+          const result = await dispatch(googleLogin({ 
+            credential: response.credential,
+            rememberMe: true
+          }))
+          console.log(response);
+          if (googleLogin.fulfilled.match(result)) {
+            navigate("/profile");
+          }
+        }}
+        onError={() => console.error("Google login error")}
+      />
+      
 
       <div className="bottom-nav">
         <span className="bottom-nav__no-account">

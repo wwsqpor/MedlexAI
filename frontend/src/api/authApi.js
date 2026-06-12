@@ -42,3 +42,14 @@ export const refreshTokenApiRequest = async (refresh) => {
 
   return response.data;
 }
+
+export const googleLoginApiRequest = async (credential) => {
+  const response = await api.post(
+    "accounts/auth/google/",
+    {
+      credential
+    }
+  )
+
+  return response.data;
+}
