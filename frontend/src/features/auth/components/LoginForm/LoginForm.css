@@ -161,3 +161,7 @@ label[for="remember-me"] > .form-input {
   font-size: var(--font-size-sm);
   border-radius: var(--border-radius-md);
 }
+
+.google-auth-btn {
+  width: 100%;
+}

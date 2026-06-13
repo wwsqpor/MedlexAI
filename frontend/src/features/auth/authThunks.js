@@ -1,7 +1,13 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { registerApiRequest, tokenApiRequest, userApiRequest, refreshTokenApiRequest } from "../../api/authApi";
+import { 
+  registerApiRequest, 
+  tokenApiRequest, 
+  userApiRequest, 
+  refreshTokenApiRequest,
+  googleLoginApiRequest,
+} from "../../api/authApi";
 
 
 export const register = createAsyncThunk(
@@ -87,7 +93,7 @@ export const logout = createAsyncThunk(
 )
 
 export const initializeAuth = createAsyncThunk(
-  "auth/initialize",
+  "auth/initializeAuth",
 
   async (_, thunkApi) => {
     try {
@@ -137,4 +143,46 @@ export const initializeAuth = createAsyncThunk(
       )
     }
   }
+)
+
+export const googleLogin = createAsyncThunk(
+  "auth/googleLogin",
+
+  async ({ credential, rememberMe}, thunkApi) => {
+    try {
+      const googleLoginApiResponseData = await googleLoginApiRequest(credential);
+      const { access, refresh } = googleLoginApiResponseData;
+
+      if (rememberMe) {
+        localStorage.setItem("refresh", refresh);
+      } else {
+        sessionStorage.setItem("refresh", refresh);
+      }
+
+      return {
+        accessToken: access,
+        user: googleLoginApiResponseData.user
+      }
+
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+
+        if (error.response) {
+         console.error("Status: ", error.response.status);
+         console.error("Data: ", error.response.data);
+        }
+        else if (error.request) {
+          console.error("No response: ", error.request);
+        }
+        else {
+          console.error("Unknow error: ", error.message);
+        }
+      } else {
+        console.error("Non-axios error: ", error);
+      }
+      return thunkApi.rejectWithValue(
+        "Login failed"
+      )
+    }
+  }  
 )
