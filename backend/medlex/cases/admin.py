@@ -56,7 +56,7 @@ class CaseTaskAdmin(admin.ModelAdmin):
 
 @admin.register(TaskOption)
 class TaskOptionAdmin(admin.ModelAdmin):
-    list_display = ['task', 'text', 'is_correct', 'correct_order']
+    list_display = ['id', 'task', 'text', 'is_correct', 'correct_order']
     list_filter = ['is_correct', 'task']
     search_fields = ['text']
 

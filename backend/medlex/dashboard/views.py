@@ -39,7 +39,10 @@ def dashboard_view(request):
         completed_at__lt=week_ago
     ).aggregate(avg=Avg('total_score'))['avg'] or 0
 
-    score_change = round(current_week_avg - previous_avg)
+    if previous_avg == 0:
+        score_change = 0
+    else:
+        score_change = round(current_week_avg - previous_avg)
 
     last_attempt = completed_attempts.order_by('-completed_at').first()
     best_attempt = completed_attempts.order_by('-total_score').first()

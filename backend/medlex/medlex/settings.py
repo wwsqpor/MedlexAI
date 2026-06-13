@@ -5,7 +5,11 @@ Django settings for medlex project — REST API backend (Angular / any SPA front
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ── Security ──────────────────────────────────────────────────────────────────
@@ -35,6 +39,8 @@ INSTALLED_APPS = [
     # Local
     'accounts',
     'cases',
+    'dashboard',
+    'ai_tutor',
 ]
 
 # ── Middleware ─────────────────────────────────────────────────────────────────

@@ -13,4 +13,7 @@ urlpatterns = [
 
     # ── Accounts (register, profile, Google OAuth) ────────────────────────────
     path('api/accounts/', include('accounts.urls')),
+    path("api/cases/", include("cases.urls")),
+    path("api/dashboard/", include("dashboard.urls")),
+    path("api/ai-tutor/", include("ai_tutor.urls")),
 ]
