@@ -1,0 +1,21 @@
+.logo {
+  display: flex;
+  gap: var(--space-3);
+}
+
+
+.logo__img {
+  width: 48px;
+  aspect-ratio: 1;
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo__text > span {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  /* line-height: 0.9; */
+}

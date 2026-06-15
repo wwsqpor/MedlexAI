@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, NavLink, Link } from "react-router-dom";
 
-import { useAuth } from "../../useAuth";
+import { useAuth } from "../../hooks/";
 import { useAppDispatch } from "../../../../app/hooks";
 import { register, login } from "../../authThunks";
 

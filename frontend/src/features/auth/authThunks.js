@@ -8,6 +8,8 @@ import {
   refreshTokenApiRequest,
   googleLoginApiRequest,
 } from "../../api/authApi";
+import { fetchProfile } from "../profile/profileThunks";
+import { setAccessToken } from "./authSlice";
 
 
 export const register = createAsyncThunk(
@@ -112,8 +114,11 @@ export const initializeAuth = createAsyncThunk(
       const refreshApiResponseData = await refreshTokenApiRequest(refresh);
       const { access, refresh: newRefresh } = refreshApiResponseData;
       storage.setItem("refresh", newRefresh);
+      thunkApi.dispatch(setAccessToken(access));
 
       const userApiResponseData = await userApiRequest(access);
+
+      await thunkApi.dispatch(fetchProfile()).unwrap()
 
       return {
         accessToken: access,
@@ -158,6 +163,8 @@ export const googleLogin = createAsyncThunk(
       } else {
         sessionStorage.setItem("refresh", refresh);
       }
+      thunkApi.dispatch(setAccessToken(access));
+      await thunkApi.dispatch(fetchProfile()).unwrap()
 
       return {
         accessToken: access,

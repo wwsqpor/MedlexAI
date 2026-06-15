@@ -1,12 +1,15 @@
-import { useAuth } from "../../features/auth/useAuth"
-import "./ProfilePage.css"  
+import ProfileHeader from "../../features/profile/components/ProfileHeader/ProfileHeader";
+import PersonalInformation from "../../features/profile/components/PersonalInformation/PersonalInformation";
+
+import styles from "./ProfilePage.module.css"  
 
 
 export default function ProfilePage() {
 
-  const { user } = useAuth();
-
   return (
-    <h1>{ JSON.stringify(user) }</h1>
+    <div className={styles["profile-page"]}>
+      <ProfileHeader />
+      <PersonalInformation />
+    </div>
   )
 }

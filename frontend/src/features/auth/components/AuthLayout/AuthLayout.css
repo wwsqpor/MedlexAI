@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: var(--space-8);
+  padding: 40px;
 }
 
 .auth-layout__left {

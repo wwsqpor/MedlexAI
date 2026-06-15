@@ -6,6 +6,10 @@ import RegisterForm from '../features/auth/components/RegisterForm/RegisterForm.
 import ProfilePage from '../pages/ProfilePage/ProfilePage.jsx';
 import ProtectedRoute from "./ProtectedRoute.jsx"
 import HomeRedirect from './HomeRedirect.jsx';
+import PageLayout from '../layouts/PageLayout/PageLayout.jsx'
+import EditProfilePage from '../pages/EditProfilePage/EditProfilePage.jsx';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
+// import MainLayout from '../layouts/MainLayout/MainLayout.jsx';
 
 
 export const router = createBrowserRouter([
@@ -28,11 +32,25 @@ export const router = createBrowserRouter([
         Component: ProtectedRoute,
         children: [
           {
-            path: "profile",
-            Component: ProfilePage,
-          }
-        ]
-      },
+            Component: PageLayout,
+            children: [
+              {
+                path: "profile",
+                Component: ProfilePage,
+              },
+              {
+                path: "profile/edit",
+                Component: EditProfilePage
+              },
+              
+            ],
+          },
+        ],
+      }
     ]
+  },
+  {
+    path: "*",
+    Component: NotFoundPage
   }
 ]);

@@ -3,8 +3,8 @@ import { useNavigate, NavLink, Link } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google"
 // import { useGoogleLogin } from "@react-oauth/google"
 
-import { useAuth } from "../../useAuth";
-import { useAppDispatch } from "../../../../app/hooks";
+import { useAuth } from "../../hooks";
+import { useAppDispatch } from "../../../../app/hooks"
 import { login, googleLogin } from "../../authThunks";
 
 import Button from '../../../../components/Button/Button'

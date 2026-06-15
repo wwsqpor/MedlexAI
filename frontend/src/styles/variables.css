@@ -19,6 +19,9 @@
   --color-blue-light: #E9F1FE;
   --color-yellow: #DFB25C;
   --color-yellow-light: #FDF8EA;
+
+  --color-shadow: rgba(34, 34, 34, 0.1);
+  --color-link-active: #1500ff;
   
 
   /* typography */
@@ -31,6 +34,7 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
+  --font-size-xs: 0.625rem;
   --font-size-sm: 0.875rem; /* 14px */
   --font-size-md: 1rem;     /* 16px */
   --font-size-lg: 1.125rem; /* 18px */

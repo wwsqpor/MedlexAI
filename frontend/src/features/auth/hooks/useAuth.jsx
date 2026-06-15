@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../../app/hooks"
 
 import {
   selectUser,
@@ -6,12 +6,12 @@ import {
   selectIsInitialized,
   selectIsLoading,
   selectError
-} from "./authSelectors";
+} from "../authSelectors";
 
 /*
 * { user, isAuthenticated, isInitialized, isLoading, error }
 */ 
-export function useAuth() {
+export default function useAuth() {
   const user = useAppSelector(selectUser);
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const isInitialized = useAppSelector(selectIsInitialized)
