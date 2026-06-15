@@ -142,5 +142,22 @@ class TaskAnswer(models.Model):
         return f"Answer: {self.task.title}"
     
 
+class Question(models.Model):
+    case        = models.ForeignKey(Case, on_delete=models.CASCADE, related_name='questions')
+    text        = models.TextField(verbose_name="Текст вопроса")
+    explanation = models.TextField(blank=True, verbose_name="Объяснение ответа")
+    order       = models.PositiveIntegerField(default=1, verbose_name="Порядок")
 
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Вопрос"
+        verbose_name_plural = "Вопросы"
 
+class AnswerOption(models.Model):
+    question   = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='options')
+    text       = models.TextField(verbose_name="Текст ответа")
+    is_correct = models.BooleanField(default=False, verbose_name="Правильный")
+
+    class Meta:
+        verbose_name = "Вариант ответа"
+        verbose_name_plural = "Варианты ответов"
