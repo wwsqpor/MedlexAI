@@ -7,7 +7,7 @@
     python parse_cases.py
 
 Требования:
-    pip install extract-text   # или docx2txt / python-docx
+    pip install extract-text
 
 Каждый объект в JSON:
 {
@@ -21,21 +21,23 @@
 }
 """
 
-import re, json, subprocess
+import re, json
 from pathlib import Path
 
-DOCX = Path("Задачи_по_мед_праву_2.docx")
-OUTPUT = Path("cases_parsed.json")
+DOCX = Path("../metadata/Задачи_по_мед_праву_2.docx")
+OUTPUT = Path("../json/cases_parsed.json")
 
 
 # ─────────────────────────────────────────────
 # 1. Extract text
 # ─────────────────────────────────────────────
 def extract_text(path: Path) -> str:
-    result = subprocess.run(["extract-text", str(path)], capture_output=True, text=True)
-    if result.returncode != 0:
-        raise RuntimeError(f"extract-text failed: {result.stderr}")
-    return result.stdout
+    from docx import Document
+    doc = Document(path)
+    paragraphs = []
+    for para in doc.paragraphs:
+        paragraphs.append(para.text)
+    return '\n'.join(paragraphs)
 
 
 # ─────────────────────────────────────────────

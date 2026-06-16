@@ -5,6 +5,26 @@
     python convert_cases.py --input cases_parsed.json --output cases_converted.json
 """
 
+"""
+Каждый объект в JSON:
+{
+  "title":              str,   -- название задачи
+  "short_description":  str,   -- короткое описание ситуации
+  "full_description":   str,   -- полное описание ситуации
+  "category":           str,   -- категория задачи
+  "difficulty":         str,   -- уровень сложности задачи
+}
+
+Пример объекта:
+{
+  "title": "Задача о согласии пациента",
+  "short_description": "Врач назначил операцию без...",
+  "full_description": "Врач назначил операцию без...\n\nВопросы:\n1. ...\n\nОтвет:\n...\n\nНормативная база:\n• ...",
+  "category": "Информированное согласие",
+  "difficulty": "medium"
+}
+"""
+
 import json
 import argparse
 from pathlib import Path
@@ -95,8 +115,8 @@ def convert(input_path: Path, output_path: Path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input',  default='cases_parsed.json',    help='Входной JSON файл')
-    parser.add_argument('--output', default='cases_converted.json', help='Выходной JSON файл')
+    parser.add_argument('--input',  default='../json/cases_parsed.json',    help='Входной JSON файл')
+    parser.add_argument('--output', default='../json/cases_converted.json', help='Выходной JSON файл')
     args = parser.parse_args()
 
     convert(Path(args.input), Path(args.output))

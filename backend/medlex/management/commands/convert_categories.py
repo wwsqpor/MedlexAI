@@ -5,6 +5,21 @@
     python convert_categories.py --input cases_parsed.json --output categories.json
 """
 
+"""
+Каждый объект в JSON:
+{
+  "name":              str,   -- название категории
+  "description":  str,        -- описание категории
+}
+
+Пример объекта:
+{
+"name": "Информированное согласие",
+"description": "Кейсы по теме получения информированного добровольного согласия пациента."
+}
+"""
+
+
 import json
 import argparse
 from pathlib import Path
@@ -94,8 +109,8 @@ def convert(input_path: Path, output_path: Path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input',  default='cases_parsed.json', help='Входной JSON файл')
-    parser.add_argument('--output', default='categories.json',   help='Выходной JSON файл')
+    parser.add_argument('--input',  default='../json/cases_parsed.json', help='Входной JSON файл')
+    parser.add_argument('--output', default='../json/categories_converted.json',   help='Выходной JSON файл')
     args = parser.parse_args()
 
     convert(Path(args.input), Path(args.output))
