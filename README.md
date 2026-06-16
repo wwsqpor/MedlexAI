@@ -53,10 +53,8 @@ The API will be available at `http://127.0.0.1:8000`.
 | `POST` | `/api/token/` | None | Login — returns JWT pair |
 | `POST` | `/api/token/refresh/` | None | Refresh access token |
 | `POST` | `/api/accounts/auth/google/` | None | Google Sign-In |
-| `GET` | `/api/accounts/profile/` | Bearer | Get current user profile |
-| `GET` | `/api/accounts/profile/extended` | Bearer | Get current user extended profile |
-| `PATCH` | `/api/accounts/profile/update/` | Bearer | Partial profile update |
-| `PUT` | `/api/accounts/profile/update/` | Bearer | Full profile update |
+| `GET/PATCH/PUT` | `/api/accounts/profile/` | Bearer | Get current user profile |
+| `GET/PATCH/PUT` | `/api/accounts/profile/extended` | Bearer | Get current user extended profile |
 
 All protected endpoints require:
 ```
