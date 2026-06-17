@@ -9,6 +9,8 @@ import HomeRedirect from './HomeRedirect.jsx';
 import PageLayout from '../layouts/PageLayout/PageLayout.jsx'
 import EditProfilePage from '../pages/EditProfilePage/EditProfilePage.jsx';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
+import DashboardPage from '../pages/DashboardPage/DashboardPage.jsx';
+import CasesPage from '../pages/CasesPage/CasesPage.jsx';
 // import MainLayout from '../layouts/MainLayout/MainLayout.jsx';
 
 
@@ -42,7 +44,14 @@ export const router = createBrowserRouter([
                 path: "profile/edit",
                 Component: EditProfilePage
               },
-              
+              {
+                path: "dashboard",
+                Component: DashboardPage
+              },
+              {
+                path: "cases",
+                Component: CasesPage
+              }
             ],
           },
         ],

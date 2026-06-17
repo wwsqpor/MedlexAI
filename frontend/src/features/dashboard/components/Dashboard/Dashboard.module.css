@@ -1,0 +1,24 @@
+.dashboard-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+  "header header header"
+  "info-cards info-cards info-cards"
+  "continue-case continue-case progress"
+  ". . progress";
+  row-gap: var(--space-8);
+  column-gap: var(--space-8);
+}
+
+.header {
+  grid-area: header;
+}
+
+.info-cards-container {
+  grid-area: info-cards;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}

@@ -6,13 +6,10 @@ import styles from "./EditProfilePage.module.css"
 
 export default function EditProfilePage() {
 
-  const { user } = useProfile()
-
   return (
     <div className={styles["edit-profile-page"]}>
       <EditProfileHeader />
       <EditProfileForm />
-      {/* <h3>{JSON.stringify(user)}</h3> */}
     </div>
   )
 }

@@ -3,7 +3,7 @@ import './Button.css'
 
 export default function Button({ 
   children, 
-  icon, 
+  icon: Icon, 
   className,
   ...props
  }) {
@@ -12,8 +12,9 @@ export default function Button({
       className={"btn " + className} 
       {...props}
     >
-      {icon && 
-      <img className="btn-icon" src={icon} alt="icon"/>}
+      {Icon && 
+      <Icon className="btn-icon" />
+      }
       {children}
     </button>
   )
