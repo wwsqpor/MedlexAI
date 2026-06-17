@@ -9,6 +9,10 @@ ENV/
 .env
 db.sqlite3
 media/
+cases_converted.json
+categories_converted.json
+cases_parsed.json
+law_references_converted.json
 
 # === Angular & Node.js ===
 node_modules/
@@ -35,3 +39,4 @@ Thumbs.db
 
 # === Miscellaneous ===
 additional_info.txt
+Задачи_по_мед_праву_2.docx
