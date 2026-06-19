@@ -34,26 +34,31 @@ export default function Nav() {
   ]
 
   return (
-    <nav className={styles["nav-container"]}>
-      {navItems.map((navItem) => {
-        const Icon = navItem.icon;
-        return (
-          <NavLink 
-            to={navItem.path}
-            key={navItem.label} 
-            className={({isActive}) => {
-              return isActive
-               ? `${styles["nav-link"]} ${styles.active}`
-               : `${styles["nav-link"]}`
-            }}
-          > 
-            <Icon className={styles.icon}/>
-            <span>
-              {navItem.label}
-            </span> 
-          </NavLink>
-        )
-      })}
+    <nav>
+      <ul className={styles["nav-container"]}>
+        {navItems.map((navItem) => {
+          const Icon = navItem.icon;
+          return (
+            <li key={navItem.label}>
+
+              <NavLink 
+              to={navItem.path}
+               
+              className={({isActive}) => {
+                return isActive
+                ? `${styles["nav-link"]} ${styles.active}`
+                : `${styles["nav-link"]}`
+              }}
+              > 
+                <Icon className={styles.icon}/>
+                <span>
+                  {navItem.label}
+                </span> 
+              </NavLink>
+            </li>
+          )
+        })}
+      </ul>
     </nav>
   )
 }

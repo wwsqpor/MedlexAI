@@ -46,20 +46,22 @@ export default function Dashboard() {
           // IconAlternative={DecreaseIcon}
           color={stats.score_change >= 0 ? "success" : "warning"}
           title="Средний балл" 
-          value={stats.average_score} 
-          trendColor={stats.score_change > 0 ? "success" : ""}
-          trend={`${stats.score_change > 0 ? "+" : stats.score_change < 0 ? "-" : ""} ${stats.score_change}% за неделю`}/>
+          value={`${stats.average_score}%`} 
+          trendColor={stats.score_change > 0 ? "success" : "warning"}
+          trend={stats.score_change ? `${stats.score_change}% за неделю` : ""}/>
         <DashboardInfoCard 
           Icon={FolderIcon}
           color="blue"
           title="Последний кейс" 
           value={stats.last_case.title ?? "-"} 
-          trend={stats.last_case.last_case ? stats.last_case.score : "-"}/>
+          // trendColor={stats.last_case.score > 50 ? "success" : "warning"}
+          // trend={stats.last_case.score ? `${stats.last_case.score}%` : "-"}
+          />
         <DashboardInfoCard 
           Icon={CupIcon}
           color="yellow"
           title="Лучший результат" 
-          value={stats.best_result.score ?? "-"} 
+          value={stats.best_result.score ? `${stats.best_result.score}%` : "-"} 
           trend={stats.best_result.title ? `Кейс: ${stats.best_result.title}` : "-"}/>
       </div>
 

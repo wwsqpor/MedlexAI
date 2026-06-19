@@ -19,6 +19,10 @@
   accent-color: var(--color-primary);
 }
 
+.form-input:focus {
+  outline-color: var(--color-primary);
+}
+
 .label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);

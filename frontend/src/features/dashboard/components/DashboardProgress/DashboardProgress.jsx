@@ -16,7 +16,7 @@ export default function DashboardProgress({
         <div 
           className={styles["progress-circle"]}
           style={
-            {"--value": 67}
+            {"--value": progress.legal_rating}
           }>
           <div className={styles["progress-inner"]}>
             <span className={styles["progress-inner__rating"]}>{ progress.legal_rating }</span>

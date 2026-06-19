@@ -17,8 +17,9 @@
 
 .info-cards-container {
   grid-area: info-cards;
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   gap: var(--space-4);
 }

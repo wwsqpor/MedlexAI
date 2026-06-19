@@ -10,7 +10,12 @@ import { formatPhone } from "../../../../utils"
 export default function PersonalInformation() {
 
   const navigate = useNavigate();
-  const { user } = useProfile();
+  const { user, isLoading } = useProfile();
+
+  if (isLoading) {
+    console.log(isLoading)
+    return <h2>Loading</h2>
+  }
 
   return (
     <Box className={styles["personal-information"]}>

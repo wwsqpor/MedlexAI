@@ -1,0 +1,33 @@
+.cases-library {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: 
+  "filters cases cases cases cases";
+  column-gap: var(--space-4);
+  row-gap: var(--space-4);
+  border: 1px solid red;
+}
+
+.cases-library__filters {
+  grid-area: filters;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.categories-filter {
+  /* grid-area: filters;  */
+}
+
+.cases-library__cases {
+  grid-area: cases;
+  display: flex;
+  flex-direction: column;
+}
+
+.cases-library__cases-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}

@@ -11,7 +11,7 @@ export const fetchProfileApiRequest = async () => {
 
 export const updateProfileApiRequest = async (data) => {
   const response = await api.patch(
-    "accounts/profile/update/",
+    "accounts/profile/",
     data
   )
 
