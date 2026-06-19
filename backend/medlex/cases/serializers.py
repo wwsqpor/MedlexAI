@@ -22,10 +22,11 @@ class TaskOptionSerializer(serializers.ModelSerializer):
 
 class CaseTaskSerializer(serializers.ModelSerializer):
     options = TaskOptionSerializer(many=True, read_only=True)
+    law_references = LawReferenceSerializer(many=True, read_only=True)
 
     class Meta:
         model = CaseTask
-        fields = ["id", "title", "instruction", "task_type", "max_score", "options"]
+        fields = ["id", "title", "instruction", "task_type", "max_score", "options", "law_references"]
 
 
 class CaseSerializer(serializers.ModelSerializer):
@@ -42,4 +43,27 @@ class UserCaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Case
-        fields = ["id", "title", "short_description", "category", "difficulty"]
+        fields = ["id", "title", "short_description", "category", "difficulty", "created_at"]
+
+
+class TaskAnswerSerializer(serializers.ModelSerializer):
+    task_title = serializers.CharField(source='task.title', read_only=True)
+
+    class Meta:
+        model = TaskAnswer
+        fields = [
+            "id", "task", "task_title", "open_answer", "score", "is_correct",
+            "ai_feedback", "ai_correct_answer", "ai_what_is_correct", "ai_what_is_missing",
+        ]
+
+
+class CaseAttemptSerializer(serializers.ModelSerializer):
+    case_title = serializers.CharField(source='case.title', read_only=True)
+    answers = TaskAnswerSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = CaseAttempt
+        fields = [
+            "id", "case", "case_title", "status", "total_score",
+            "started_at", "completed_at", "answers",
+        ]
