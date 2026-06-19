@@ -20,11 +20,14 @@ class Command(BaseCommand):
     help = "Загружает задачи из cases_parsed.json в базу данных"
 
     def add_arguments(self, parser):
+        DIR = Path(__file__).resolve().parent
+        JSON = DIR.parent.parent.parent / 'management' / 'json'
+
         parser.add_argument(
             '--json',
             type=str,
-            default='cases_parsed.json',
-            help='Путь к JSON-файлу (по умолчанию: cases_parsed.json)',
+            default=str(JSON / 'cases_parsed.json'),
+            help='Путь к JSON-файлу',
         )
         parser.add_argument(
             '--clear',
