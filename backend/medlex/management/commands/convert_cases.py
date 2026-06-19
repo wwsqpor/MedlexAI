@@ -2,11 +2,11 @@
 Конвертирует cases_parsed.json в новый формат для загрузки через админку.
 
 Использование:
+    Ввести следующую команду в директории, где расположен manage.py:
+
     python management/commands/convert_cases.py \
     --input management/json/cases_parsed.json \
     --output management/json/cases_converted.json
-
-    python convert_cases.py --input cases_parsed.json --output cases_converted.json
 """
 
 """
@@ -118,9 +118,12 @@ def convert(input_path: Path, output_path: Path):
 
 
 if __name__ == '__main__':
+    DIR = Path(__file__).parent
+    JSON = DIR.parent / 'json'
+
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input',  default='../json/cases_parsed.json',    help='Входной JSON файл')
-    parser.add_argument('--output', default='../json/cases_converted.json', help='Выходной JSON файл')
+    parser.add_argument('--input',  default=str(JSON / 'cases_parsed.json'),    help='Входной JSON файл')
+    parser.add_argument('--output', default=str(JSON / 'cases_converted.json'), help='Выходной JSON файл')
     args = parser.parse_args()
 
     convert(Path(args.input), Path(args.output))

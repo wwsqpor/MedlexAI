@@ -112,9 +112,12 @@ def convert(input_path: Path, output_path: Path):
 
 
 if __name__ == '__main__':
+    DIR = Path(__file__).parent
+    JSON = DIR.parent / 'json'
+
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input',  default='../json/cases_parsed.json', help='Входной JSON файл')
-    parser.add_argument('--output', default='../json/categories_converted.json',   help='Выходной JSON файл')
+    parser.add_argument('--input',  default=str(JSON / 'cases_parsed.json'), help='Входной JSON файл')
+    parser.add_argument('--output', default=str(JSON / 'categories_converted.json'),   help='Выходной JSON файл')
     args = parser.parse_args()
 
     convert(Path(args.input), Path(args.output))

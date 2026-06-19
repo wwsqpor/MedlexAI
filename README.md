@@ -37,6 +37,9 @@ python manage.py migrate
 
 # 5. Start the development server
 python manage.py runserver
+
+# 6. Load the parsed data into the database
+python management/commands/run_all_parse_commands.py
 ```
 
 The API will be available at `http://127.0.0.1:8000`.
