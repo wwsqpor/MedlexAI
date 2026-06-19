@@ -1,6 +1,5 @@
 from django.shortcuts import render
-
-# Create your views here.
+from .rag import search_law
 import requests
 from django.conf import settings
 from rest_framework.decorators import api_view, permission_classes
@@ -15,18 +14,25 @@ def ai_tutor_chat(request):
 
     if not message.strip():
         return Response({"error": "Сообщение пустое"}, status=400)
+    law_context = search_law(message)
 
     prompt = f"""
 Ты AI-Тьютор MEDLEX AI.
 
-Пользователь описывает медицинско-правовую ситуацию.
-Объясни простым языком:
-1. правомерна ли ситуация;
-2. какие права/обязанности есть;
-3. на что обратить внимание.
+Отвечай только на основе найденных норм закона ниже.
+Если информации недостаточно, скажи, что в найденном фрагменте закона нет точного ответа.
+
+Контекст из закона:
+{law_context}
 
 Ситуация пользователя:
 {message}
+
+Объясни простым языком:
+1. правомерна ли ситуация;
+2. какие права/обязанности есть;
+3. какие статьи закона подходят;
+4. как правильно поступить.
 """
 
     response = requests.post(
