@@ -2,6 +2,10 @@
 Конвертирует cases_parsed.json в новый формат для загрузки через админку.
 
 Использование:
+    python management/commands/convert_cases.py \
+    --input management/json/cases_parsed.json \
+    --output management/json/cases_converted.json
+
     python convert_cases.py --input cases_parsed.json --output cases_converted.json
 """
 

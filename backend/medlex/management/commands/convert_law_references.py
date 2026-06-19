@@ -2,7 +2,11 @@
 Извлекает уникальные ссылки на законы из cases_parsed.json и создаёт law_references.json.
 
 Использование:
-    python convert_law_references.py --input cases_parsed.json --output law_references.json
+    Ввести следующую команду в директории, где расположен manage.py:
+
+    python management/commands/convert_law_references.py \
+    --input management/json/cases_parsed.json \
+    --output management/json/law_references.json
 """
 
 """

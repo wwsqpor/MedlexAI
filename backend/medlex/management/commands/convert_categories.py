@@ -2,7 +2,11 @@
 Извлекает уникальные категории из cases_parsed.json и создаёт categories.json.
 
 Использование:
-    python convert_categories.py --input cases_parsed.json --output categories.json
+    Ввести следующую команду в директории, где расположен manage.py:
+
+    python management/commands/convert_categories.py \
+    --input management/json/cases_parsed.json \
+    --output management/json/categories.json
 """
 
 """

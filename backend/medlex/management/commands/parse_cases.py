@@ -4,6 +4,12 @@
 Выходные данные: cases_parsed.json
 
 Использование:
+    Ввести следующую команду в директории, где расположен manage.py:
+
+    python management/commands/parse_cases.py \
+    --input management/metadata/Задачи_по_мед_праву_2.docx \
+    --output management/json/parsed_test.json
+
     python parse_cases.py
 
 Требования:
@@ -24,8 +30,8 @@
 import re, json
 from pathlib import Path
 
-DOCX = Path("../metadata/Задачи_по_мед_праву_2.docx")
-OUTPUT = Path("../json/cases_parsed.json")
+DOCX = Path("management/metadata/Задачи_по_мед_праву_2.docx")
+OUTPUT = Path("management/json/cases_parsed.json")
 
 
 # ─────────────────────────────────────────────
