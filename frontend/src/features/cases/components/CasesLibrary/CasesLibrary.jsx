@@ -1,14 +1,34 @@
-import { useCasesFilters } from "../../hooks"
+import { useEffect } from "react"
 
+import { useAppDispatch } from "../../../../app/hooks"
+import { useCases, useCasesFilters } from "../../hooks"
+import { fetchCases, fetchCategories } from "../../casesThunks"
+
+import Box from "../../../../components/Box/Box"
 import CasesCategories from "../CasesCategories/CasesCategories"
 import CasesFilters from "../CasesFilters/CasesFilters"
 import CasesSearch from "../CasesSearch/CasesSearch"
 import CasesSort from "../CasesSort/CasesSort"
+import CasesList from "../CasesList/CasesList"
 
 import styles from "./CasesLibrary.module.css"
 
 
 export default function CasesLibrary() {
+
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(fetchCategories())
+    dispatch(fetchCases())
+  }, [])
+
+  const {
+    cases,
+    categories,
+    isLoading,
+    error
+  } = useCases();
 
   const {
     search,
@@ -16,15 +36,20 @@ export default function CasesLibrary() {
     category,
     difficulty,
     setFilter,
-    clearFilters
   } = useCasesFilters()
+
+  if (isLoading) {
+    return <h2>Loading</h2>
+  }
 
   return (
     <div className={styles["cases-library"]}>
       <div className={styles["cases-library__filters"]}>
         <CasesCategories 
           className={styles["categories-filter"]}
-          // categories={}
+          categoriesList={categories}
+          activeCategoryId={category}
+          onCategoryChange={(value) => setFilter("category", value)}
         />
         <CasesFilters 
           difficulty={difficulty}
@@ -33,7 +58,7 @@ export default function CasesLibrary() {
       </div>
       
       <div className={styles["cases-library__cases"]}>
-        <div className={styles["cases-library__cases-top"]}>
+        <Box className={styles["cases-library__cases-top"]}>
           <CasesSearch 
             value={search}
             onChange={(value) => setFilter("search", value)}
@@ -42,7 +67,8 @@ export default function CasesLibrary() {
             value={order}
             onChange={(value) => setFilter("order", value)}
             />
-        </div>
+        </Box>
+        <CasesList casesList={cases}/>
       </div>
     </div>
   )

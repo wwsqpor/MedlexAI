@@ -19,3 +19,16 @@
 .difficulty-filter__select {
   width: 100%;
 }
+
+.clear-filters-btn {
+  font-size: var(--font-size-sm);
+  height: 2rem;
+  font-weight: var(--font-weight-regular);
+  /* justify-content: flex-end; */
+  padding: 0px var(--space-6);
+  /* align-items: center; */
+  border: 1px solid var(--color-primary);
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+  width: 100%;
+}

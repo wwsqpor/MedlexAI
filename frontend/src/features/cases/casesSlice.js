@@ -1,10 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchCases } from "./casesThunks";
+import { 
+  fetchCases,
+  fetchCategories,
+
+
+} from "./casesThunks";
 
 const initialState = {
   cases: [],
   selectedCase: null,
+
+  categories: [],
 
   isLoading: false,
   error: ""
@@ -35,6 +42,21 @@ const casesSlice = createSlice({
         state.isLoading = false;
         state.cases = action.payload;
       })
+      .addCase(fetchCategories.pending, (state) => {
+        state.isLoading = true;
+        state.error = "";
+      })
+      .addCase(fetchCategories.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchCategories.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.categories = action.payload;
+      })
+      // .addCase(fetchMyCases.pending, (state, action) => {
+
+      // })
   }
 })
 

@@ -1,4 +1,8 @@
+import { useCasesFilters } from "../../hooks"
+
+import Dropdown from "../../../../components/Dropdown/Dropdown"
 import Box from "../../../../components/Box/Box"
+import Button from "../../../../components/Button/Button"
 import Select from "../../../../components/Select/Select"
 
 import styles from "./CasesFilters.module.css"
@@ -29,10 +33,15 @@ export default function CasesFilters({
   onDifficultyChange
 }) {
 
+  const { clearFilters } = useCasesFilters();
 
   return (
-    <Box className={styles["main-filters"]}>
-      <h5>Фильтры</h5>
+    <Dropdown 
+      className={styles["main-filters"]}
+      trigger={
+        <h5>Фильтры</h5>
+      }
+    >
       <div className={styles["main-filters__difficulty-filter"]}>
         <p className={styles["difficulty-filter__title"]}>Сложность</p>
         <Select
@@ -42,6 +51,12 @@ export default function CasesFilters({
           onChange={(e) => onDifficultyChange(e.target.value)}
         />
       </div>
-    </Box>
+      <Button 
+        className={styles["clear-filters-btn"]}
+        onClick={() => clearFilters()}
+      >
+        Сбросить фильтры
+      </Button>
+    </Dropdown>
   )
 }
