@@ -42,6 +42,7 @@ export default function CasesSort({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       options={options}
+      className={styles.sort}
     >
     </Select>
   )

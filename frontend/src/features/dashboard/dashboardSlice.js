@@ -11,7 +11,7 @@ import { fetchDashboard } from "./dashboardThunks"
 //   // best_result
 // }
 const initialState = {
-  isLoading: false,
+  status: "idle",
   error: "",
   stats: null,
   continue_case: null,
@@ -30,15 +30,15 @@ const dashboardSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addCase(fetchDashboard.pending, (state) => {
-      state.isLoading = true;
+      state.status = "loading";
       state.error = "";
     })
     .addCase(fetchDashboard.rejected, (state, action) => {
-      state.isLoading = false;
+      state.status = "failed";
       state.error = action.payload;
     })
     .addCase(fetchDashboard.fulfilled, (state, action) => {
-      state.isLoading = false;
+      state.status = "succeeded";
       state.stats = action.payload.stats;
       state.continue_case = action.payload.continue_case;
       state.progress = action.payload.progress;

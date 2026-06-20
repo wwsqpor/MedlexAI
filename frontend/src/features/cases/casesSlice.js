@@ -3,17 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import { 
   fetchCases,
   fetchCategories,
-
+  fetchCaseDetails
 
 } from "./casesThunks";
 
 const initialState = {
   cases: [],
-  selectedCase: null,
+  caseDetails: null,
 
   categories: [],
 
-  isLoading: false,
+  casesStatus: "idle",
+  categoriesStatus: "idle",
+  caseDetailsStatus: "idle",
   error: ""
 }
 
@@ -23,43 +25,52 @@ const casesSlice = createSlice({
   initialState,
 
   reducers: {
-    selectCase(state, action) {
-      state.selectedCase = action.payload;
+    setCaseDetails(state, action) {
+      state.caseDetails = action.payload;
     }
   },
 
   extraReducers: (builder) => {
     builder
       .addCase(fetchCases.pending, (state) => {
-        state.isLoading = true;
+        state.casesStatus = "loading";
         state.error = "";
       })
       .addCase(fetchCases.rejected, (state, action) => {
-        state.isLoading = false;
+        state.casesStatus = "failed";
         state.error = action.payload;
       })
       .addCase(fetchCases.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.casesStatus = "succeeded";
         state.cases = action.payload;
       })
       .addCase(fetchCategories.pending, (state) => {
-        state.isLoading = true;
+        state.categoriesStatus = "loading";
         state.error = "";
       })
       .addCase(fetchCategories.rejected, (state, action) => {
-        state.isLoading = false;
+        state.categoriesStatus = "failed";
         state.error = action.payload;
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.categoriesStatus = "succeeded";
         state.categories = action.payload;
       })
-      // .addCase(fetchMyCases.pending, (state, action) => {
-
-      // })
+      .addCase(fetchCaseDetails.pending, (state) => {
+        state.caseDetailsStatus = "loading";
+        state.error = "";
+      })
+      .addCase(fetchCaseDetails.rejected, (state, action) => {
+        state.caseDetailsStatus = "failed";
+        state.error = action.payload;
+      })
+      .addCase(fetchCaseDetails.fulfilled, (state, action) => {
+        state.caseDetailsStatus = "succeeded";
+        state.caseDetails = action.payload;
+      })
   }
 })
 
-export const { selectCase } = casesSlice.actions;
+export const { setcaseDetails } = casesSlice.actions;
 
 export default casesSlice.reducer;

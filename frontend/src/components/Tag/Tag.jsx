@@ -12,11 +12,15 @@ const colorClasses = {
 
 export default function Tag({
   color,
-  children
+  children,
+  className
 }) {
   
+  if (!children) {
+    return (<></>)
+  }
 
   return (
-    <span className={`${styles.tag} ${colorClasses[color]}`}>{ children }</span>
+    <span className={`${styles.tag} ${colorClasses[color]} ${className ?? ""}`}>{ children }</span>
   )
 }

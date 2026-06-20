@@ -8,4 +8,7 @@
   gap: var(--space-8);
   /* border: 1px solid red; */
   padding: var(--space-7) var(--space-8);
+  
+  position: sticky;
+  top: 0;
 }

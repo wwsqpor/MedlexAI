@@ -1,8 +1,5 @@
-import { useEffect } from "react";
 
-import { useAppDispatch } from "../../../../app/hooks";
 import { useDashboard } from "../../hooks"
-import { fetchDashboard } from "../../dashboardThunks"
 
 import DashboardHeader from "../DashboardHeader/DashboardHeader"
 import DashboardInfoCard from "../DashboardInfoCard/DashboardInfoCard";
@@ -20,10 +17,6 @@ import styles from "./Dashboard.module.css"
 
 export default function Dashboard() {
 
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchDashboard())
-  }, [dispatch]);
   const { stats, continueCase, progress, isLoading } = useDashboard();
 
   if (isLoading || !stats) {

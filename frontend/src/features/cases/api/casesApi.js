@@ -11,7 +11,7 @@ export const fetchCaseDetailsApiRequest = async (caseId) => {
   const response = await api.get(
     `cases/cases/${caseId}/`
   )
-  return response;
+  return response.data;
 }
 
 export const fetchCategoriesApiRequest = async () => {
@@ -20,4 +20,3 @@ export const fetchCategoriesApiRequest = async () => {
   )
   return response.data;
 }
-

@@ -1,33 +1,37 @@
+import { useSelectedCase } from "../../hooks"
 
-import Tag from "../Tag/Tag"
+import Tag from "../../../../components/Tag/Tag"
 import Box from "../../../../components/Box/Box"
 
 import styles from "./CaseCard.module.css"
 
+
+const difficultyMap = {
+  easy: {
+    label: "Легкий",
+    color: "success"
+  },
+  medium: {
+    label: "Средний",
+    color: "yellow"
+  },
+  hard: {
+    label: "Сложный",
+    color: "warning"
+  }
+}
 
 export default function CaseCard({
   caseData,
   ...props
 }) {
 
-  const difficultyMap = {
-    easy: {
-      label: "Легкий",
-      color: "success"
-    },
-    medium: {
-      label: "Средний",
-      color: "yellow"
-    },
-    hard: {
-      label: "Сложный",
-      color: "warning"
-    }
-  }
+  const { selectedCaseId, selectCase } = useSelectedCase();
 
   return (
     <Box 
-      className={styles["case-card"]}
+      onClick={() => selectCase(caseData.id)}
+      className={`${styles["case-card"]} ${String(caseData.id) === selectedCaseId ? styles["case-card-selected"] : ""}`}
       {...props}
     >
       <div className={styles["case-card__info"]}>

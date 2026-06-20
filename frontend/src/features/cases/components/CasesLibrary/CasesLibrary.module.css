@@ -5,6 +5,7 @@
   "filters cases cases cases cases";
   column-gap: var(--space-4);
   row-gap: var(--space-4);
+  position: relative;
   /* border: 1px solid red; */
 }
 

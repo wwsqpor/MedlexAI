@@ -1,24 +1,38 @@
+import { useEffect } from "react";
+
 import { 
   selectStats,
   selectContinueCase,
   selectProgress,
   selectWeakTopics,
   selectStrongTopics,
-  selectIsLoading,
+  selectStatus,
   selectError,
  } from "../dashboardSelectors";
-import { useAppSelector } from "../../../app/hooks" 
+
+import { useAppSelector, useAppDispatch } from "../../../app/hooks" 
+
+import { fetchDashboard } from "../dashboardThunks";
 
 
 export default function useDashboard() {
+
+  const dispatch = useAppDispatch();
 
   const stats = useAppSelector(selectStats);
   const continueCase = useAppSelector(selectContinueCase);
   const progress = useAppSelector(selectProgress);
   const weakTopics = useAppSelector(selectWeakTopics);
   const strongTopics = useAppSelector(selectStrongTopics);
-  const isLoading = useAppSelector(selectIsLoading);
+  const status = useAppSelector(selectStatus);
   const error = useAppSelector(selectError);
+
+  useEffect(() => {
+    console.log(status);
+    if (status === "idle") {
+      dispatch(fetchDashboard())
+    }
+  }, [status, dispatch])
 
   return {
     stats,
@@ -26,7 +40,8 @@ export default function useDashboard() {
     progress,
     weakTopics,
     strongTopics,
-    isLoading, 
+    status,
+    isLoading: status === "loading", 
     error,
   }
 

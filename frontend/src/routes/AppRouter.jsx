@@ -12,7 +12,7 @@ import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.jsx';
 import DashboardPage from '../pages/DashboardPage/DashboardPage.jsx';
 import CasesPage from '../pages/CasesPage/CasesPage.jsx';
 import CasesLibrary from '../features/cases/components/CasesLibrary/CasesLibrary.jsx';
-import CasesHistory from '../features/cases/components/CasesHistory/CasesHistory.jsx';
+import CasesHistory from '../features/userCases/components/CasesHistory/CasesHistory.jsx';
 // import MainLayout from '../layouts/MainLayout/MainLayout.jsx';
 
 

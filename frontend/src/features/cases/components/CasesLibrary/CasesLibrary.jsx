@@ -1,8 +1,5 @@
-import { useEffect } from "react"
 
-import { useAppDispatch } from "../../../../app/hooks"
-import { useCases, useCasesFilters } from "../../hooks"
-import { fetchCases, fetchCategories } from "../../casesThunks"
+import { useCasesLibrary, useCasesFilters } from "../../hooks"
 
 import Box from "../../../../components/Box/Box"
 import CasesCategories from "../CasesCategories/CasesCategories"
@@ -10,25 +7,19 @@ import CasesFilters from "../CasesFilters/CasesFilters"
 import CasesSearch from "../CasesSearch/CasesSearch"
 import CasesSort from "../CasesSort/CasesSort"
 import CasesList from "../CasesList/CasesList"
+import CaseDrawer from "../CaseDrawer/CaseDrawer"
 
 import styles from "./CasesLibrary.module.css"
 
 
 export default function CasesLibrary() {
 
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(fetchCategories())
-    dispatch(fetchCases())
-  }, [])
-
   const {
     cases,
     categories,
-    isLoading,
-    error
-  } = useCases();
+    casesStatus,
+    categoriesStatus,
+  } = useCasesLibrary();
 
   const {
     search,
@@ -38,7 +29,7 @@ export default function CasesLibrary() {
     setFilter,
   } = useCasesFilters()
 
-  if (isLoading) {
+  if (casesStatus === "loading" || categoriesStatus === "loading") {
     return <h2>Loading</h2>
   }
 
@@ -70,6 +61,7 @@ export default function CasesLibrary() {
         </Box>
         <CasesList casesList={cases}/>
       </div>
+      <CaseDrawer className={styles["cases-library__panel"]}/>
     </div>
   )
 }

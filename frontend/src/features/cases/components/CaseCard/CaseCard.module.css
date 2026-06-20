@@ -5,6 +5,13 @@
   justify-content: space-between;
   align-items: flex-start;
 
+  cursor: pointer;
+
+}
+
+.case-card-selected {
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .case-card__info {

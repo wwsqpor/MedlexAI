@@ -1,9 +1,9 @@
 import api from "../../../api/axios";
 
 
-export const fetchMyCasesApiRequest = async () => {
+export const fetchUserCaseSessionsApiRequest = async () => {
   const response = await api.get(
-    "cases/attemps/"
+    "cases/attempts/"
   )
   return response.data;
 }

@@ -39,3 +39,18 @@ export const fetchCategories = createAsyncThunk(
   }
 )
 
+export const fetchCaseDetails = createAsyncThunk(
+  "cases/fetchCaseDetails",
+
+  async (caseId, thunkApi) => {
+    try {
+      const fetchCaseDetailsApiResponseData = await fetchCaseDetailsApiRequest(caseId);
+      
+      return fetchCaseDetailsApiResponseData;
+    } catch (error) {
+      return thunkApi.rejectWithValue(
+        error?.response?.data?.message ?? `Failed to fetch case details with id ${caseId}`
+      )
+    }
+  }
+)

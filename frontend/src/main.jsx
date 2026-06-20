@@ -11,11 +11,11 @@ import './styles/globals.css'
 import './styles/variables.css'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <Provider store={store}>
       <GoogleOAuthProvider clientId={clientId}>
         <App />
       </GoogleOAuthProvider>
     </Provider>
-  </StrictMode>,
+  // </StrictMode>,
 )

@@ -1,8 +1,10 @@
 import useCasesFilters from "./useCasesFilters";
-import useCases from "./useCases"
+import useCasesLibrary from "./useCasesLibrary"
+import useSelectedCase from "./useSelectedCase";
 
 
 export {
   useCasesFilters,
-  useCases
+  useCasesLibrary,
+  useSelectedCase
 }

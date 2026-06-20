@@ -1,0 +1,57 @@
+.history-card {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+}
+
+.case-card__info {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  border: 1px solid red;
+}
+
+.title {
+  font-size: var(--font-size-md);
+}
+
+.tags {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.history-card__result {
+  min-width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  /* border: 1px solid red; */
+}
+
+.result-status {
+  font-weight: var(--font-weight-semibold);
+  display: flex;
+  flex-direction: column;
+}
+
+.result-date {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.result-score {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  /* align-self: center; */
+}
+
+.score-tag {
+  padding: var(--space-2) var(--space-4);
+}

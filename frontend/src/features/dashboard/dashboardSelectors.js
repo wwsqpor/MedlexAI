@@ -36,9 +36,8 @@ export const selectStrongTopics = (state) =>
 export const selectWeakTopics = (state) =>
   state.dashboard.weak_topics;
 
-export const selectIsLoading = (state) => {
-  state.dashboard.isLoading;
-}
+export const selectStatus = (state) => 
+  state.dashboard.status;
 
 export const selectError = (state) => {
   state.dashboard.error;
