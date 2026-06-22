@@ -1,0 +1,55 @@
+.open-question-task {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.input {
+  width: 100%;
+  field-sizing: content;
+  resize: none;
+
+  background-color: var(--color-bg-secondary);
+
+  border: 1px solid var(--color-text-secondary);
+  border-radius: var(--border-radius-md);
+
+  padding: var(--space-2);
+}
+
+.input:focus {
+  outline-color: var(--color-primary);
+}
+
+.correct, .feedback {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.what-is-correct, .what-is-missing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  border-radius: var(--border-radius-md);
+  padding: var(--space-2);
+}
+
+.what-is-correct {
+  background-color: var(--color-success-secondary);
+}
+
+.what-is-missing {
+  background-color: var(--color-warning-secondary);
+}
+
+.what-is-correct > ul, .what-is-missing > ul {
+  list-style: none;
+}

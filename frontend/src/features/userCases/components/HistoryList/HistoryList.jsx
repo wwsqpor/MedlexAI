@@ -13,7 +13,7 @@ export default function HistoryList() {
   }
 
 
-  console.log(userCaseSessions)
+  // console.log(userCaseSessions)
 
   return (
     <div className={styles["history-list"]}>

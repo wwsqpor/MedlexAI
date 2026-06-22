@@ -20,3 +20,13 @@ export const selectRecentUserCases = createSelector(
       .slice(0, 3);
   }
 )
+
+export const selectCurrentSession = (state) => state.userCases.currentSession;
+
+export const selectCurrentSessionStatus = (state) => state.userCases.currentSessionStatus;
+
+export const selectSubmitAnswerStatus = (state) => state.userCases.submitAnswerStatus;
+
+export const selectTaskAnswer = (state, taskId) => state.userCases.currentSession.answers.find(
+  a => a.task === taskId
+)

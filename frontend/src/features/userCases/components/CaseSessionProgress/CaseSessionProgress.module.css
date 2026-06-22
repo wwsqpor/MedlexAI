@@ -1,0 +1,50 @@
+.progress {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.progress-stage {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: 240px;
+  height: 6px;
+  
+  overflow: hidden;
+
+  background-color: var(--color-bg-primary);
+  
+  border-radius: var(--border-radius-md);
+}
+
+.fill, .half-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+}
+
+.half-fill {
+  width: 50%;
+}
+
+.stage-fill {
+  color: var(--color-bg);
+  background-color: var(--color-primary);
+}

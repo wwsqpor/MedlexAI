@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import RootLayout from '../layouts/RootLayout';
 import AuthLayout from '../features/auth/components/AuthLayout/AuthLayout.jsx'
 import LoginForm from '../features/auth/components/LoginForm/LoginForm.jsx'
@@ -13,6 +13,8 @@ import DashboardPage from '../pages/DashboardPage/DashboardPage.jsx';
 import CasesPage from '../pages/CasesPage/CasesPage.jsx';
 import CasesLibrary from '../features/cases/components/CasesLibrary/CasesLibrary.jsx';
 import CasesHistory from '../features/userCases/components/CasesHistory/CasesHistory.jsx';
+import CaseSessionPage from '../pages/CaseSessionPage/CaseSessionPage.jsx';
+import CaseSessionTaskPage from "../pages/CaseSessionTaskPage/CaseSessionTaskPage.jsx"
 // import MainLayout from '../layouts/MainLayout/MainLayout.jsx';
 
 
@@ -61,8 +63,21 @@ export const router = createBrowserRouter([
                   {
                     path: "history",
                     Component: CasesHistory
+                  },
+                ]
+              },
+              {
+                path: "cases/sessions/:sessionId",
+                Component: CaseSessionPage,
+                children: [
+                  {
+                    index: true,
+                    element: <Navigate to="tasks/1" replace/>
+                  },
+                  {
+                    path: "tasks/:taskId",
+                    Component: CaseSessionTaskPage
                   }
-
                 ]
               }
             ],

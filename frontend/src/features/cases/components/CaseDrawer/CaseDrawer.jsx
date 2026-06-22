@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { useSelectedCase } from "../../hooks";
 import { fetchCaseDetails } from "../../casesThunks";
 import { selectCaseDetails, selectCaseDetailsStatus } from "../../casesSelectors";
+import { startUserCaseSession } from "../../../userCases/userCasesThunks";
 
 import Box from "../../../../components/Box/Box"
 import Tag from "../../../../components/Tag/Tag"
@@ -64,8 +65,9 @@ export default function CaseDrawer({
     return <h3>Loading</h3>
   }
 
-  const handleStartCase = () => {
-    navigate(`/cases/sessions/${caseDetails.id}`)
+  const handleStartCase = async () => {
+    const response = await dispatch(startUserCaseSession(caseDetails.id)).unwrap();
+    navigate(`/cases/sessions/${response.id}`)
   }
 
   return (

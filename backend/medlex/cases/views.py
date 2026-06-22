@@ -258,6 +258,7 @@ def check_open_answer_with_ai(task, student_answer):
     )
 
     result = response.json()
+    print(result)
     content = result["choices"][0]["message"]["content"]
 
     print("AI RAW CONTENT:", content)
@@ -377,7 +378,7 @@ def submit_answer(request):
 
     return Response({
         "answer_id": answer.id,
-        "task": task.title,
+        "task": task.id,
         "score": result["score"],
         "is_correct": result["is_correct"],
         "feedback": result["feedback"],

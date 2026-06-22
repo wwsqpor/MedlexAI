@@ -53,7 +53,7 @@ class UserCaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Case
-        fields = ['id', 'title', 'short_description', 'difficulty', 'category', 'created_at']
+        fields = ['id', 'title', 'full_description', 'short_description', 'difficulty', 'category', 'created_at']
 
 
 class TaskAnswerSerializer(serializers.ModelSerializer):
