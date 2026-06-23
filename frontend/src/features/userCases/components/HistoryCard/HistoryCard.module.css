@@ -5,6 +5,7 @@
   justify-content: space-between;
   align-items: flex-start;
 
+  cursor: pointer;
 }
 
 .case-card__info {
@@ -12,7 +13,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .title {

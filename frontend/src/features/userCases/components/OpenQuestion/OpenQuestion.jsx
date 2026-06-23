@@ -13,7 +13,7 @@ export default function OpenQuestion({
 }) {
 
   
-  const { currentTask: task, submitTaskAnswer, currentTaskAnswer: taskAnswer } = useTask();
+  const { currentTask: task, submitTaskAnswer, currentTaskAnswer: taskAnswer, submitAnswerStatus } = useTask();
   
   const [answer, setAnswer] = useState(taskAnswer?.open_answer ? taskAnswer?.open_answer : "");
 
@@ -35,7 +35,7 @@ export default function OpenQuestion({
           />
       </div>
       <Button
-        onClick={() => submitTaskAnswer({ openAnswer: answer })}
+        onClick={async () => await submitTaskAnswer({ openAnswer: answer })}
         disabled={taskAnswer?.open_answer ? true : ""}
       >
         Проверить

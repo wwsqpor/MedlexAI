@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom"
+
 import Tag from "../../../../components/Tag/Tag"
 import Box from "../../../../components/Box/Box"
 
@@ -9,16 +11,23 @@ export default function HistoryCard({
   ...props
 }) {
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/cases/sessions/${caseData.id}/`)
+  }
+
   return (
     <Box 
       className={styles["history-card"]}
+      onClick={handleClick}
       {...props}
     >
       <div className={styles["case-card__info"]}>
         <h4 className={styles.title}>
-          { caseData.case_title }
+          { caseData.case.title }
         </h4>
-        
+        <p>{caseData.case.short_description}</p>
       </div>
 
       <div className={styles["history-card__result"]}>
@@ -28,7 +37,7 @@ export default function HistoryCard({
           </span>
           <span className={styles["result-date"]}>
             {caseData.completed_at 
-            ? new Date(caseData.completed_at).toLocaleDateString('ru-RU', {
+            ? new Date(caseData.case.completed_at).toLocaleDateString('ru-RU', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric'

@@ -1,0 +1,25 @@
+.message {
+  max-width: 60%;
+  /* overflow-wrap: break-word; */
+  
+  padding: var(--space-2);
+  border-radius: var(--border-radius-md);
+}
+
+.message ol,
+.message ul {
+  padding-left: var(--space-4);
+}
+
+.AI, .student {
+}
+
+.AI {
+  align-self: flex-start;
+  background-color: var(--color-blue-light);
+}
+
+.student {
+  align-self: flex-end;
+  background-color: var(--color-success-secondary);
+}

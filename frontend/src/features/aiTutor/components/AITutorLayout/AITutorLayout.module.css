@@ -1,0 +1,12 @@
+.ai-tutor-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  min-height: 30vh;
+  max-height: 65vh; 
+}

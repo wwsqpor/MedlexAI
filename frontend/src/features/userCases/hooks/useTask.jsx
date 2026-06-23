@@ -7,7 +7,7 @@ import {
   selectSubmitAnswerStatus,
   selectTaskAnswer
 } from "../userCasesSelectors"
-import { submitAnswer } from "../userCasesThunks";
+import { fetchUserCaseSessionDetails, submitAnswer } from "../userCasesThunks";
  
 
 export default function useTask() {
@@ -21,15 +21,16 @@ export default function useTask() {
   const currentTaskAnswer = useAppSelector(state => selectTaskAnswer(state, currentTask.id))
 
 
-  const submitTaskAnswer = (payload) => {
+  const submitTaskAnswer = async (payload) => {
     console.log("Payload: ", payload)
-    dispatch(
+    await dispatch(
       submitAnswer({
         sessionId: Number(sessionId),
         taskId: currentTask.id,
         ...payload
       })
     ).unwrap()
+    dispatch(fetchUserCaseSessionDetails(Number(sessionId)));
   }
 
   return {

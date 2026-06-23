@@ -18,6 +18,7 @@ export default function DashboardCase({
 
   const caseExist = !Object.values(continueCase).every(value => value === null);
   const handleNewCase = () => navigate("/cases")
+  const handleContinue = () => navigate(`/cases/sessions/${continueCase.attempt_id}`)
   
   return (
     <Box className={styles["dashboard-case-container"]}>
@@ -33,8 +34,25 @@ export default function DashboardCase({
             }</p>
           </div>
           <div className={styles["dashboard-case-container__btns"]}>
-            {caseExist && <Button icon={PlayIcon} className={styles["continue-btn"]}>Продолжить кейс</Button>}
-            <Button onClick={handleNewCase} icon={PlusIcon} className={caseExist ? styles["new-btn"] : styles["continue-btn"]}>Начать новый кейс</Button>
+            {caseExist && 
+              <Button 
+                onClick={handleContinue}
+                icon={PlayIcon} 
+                className={styles["continue-btn"]}
+              >
+                Продолжить кейс
+              </Button>
+            }
+            <Button 
+              onClick={handleNewCase} 
+              icon={PlusIcon} 
+              className={
+                caseExist 
+                ? styles["new-btn"] 
+                : styles["continue-btn"]
+              }>
+                Начать новый кейс
+              </Button>
           </div>
         </>
       )}

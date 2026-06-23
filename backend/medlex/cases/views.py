@@ -379,6 +379,7 @@ def submit_answer(request):
     return Response({
         "answer_id": answer.id,
         "task": task.id,
+        "selected_options": selected_option_ids,
         "score": result["score"],
         "is_correct": result["is_correct"],
         "feedback": result["feedback"],

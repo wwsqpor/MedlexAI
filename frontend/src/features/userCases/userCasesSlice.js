@@ -74,7 +74,7 @@ const userCases = createSlice({
     })
     .addCase(submitAnswer.fulfilled, (state, action) => {
       state.submitAnswerStatus = "succeeded";
-      state.currentSession.answers = action.payload;
+      // state.currentSession.answers.push(action.payload);
     })
   }
 })

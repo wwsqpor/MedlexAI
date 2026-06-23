@@ -13,7 +13,7 @@ export default function PersonalInformation() {
   const { user, isLoading } = useProfile();
 
   if (isLoading) {
-    console.log(isLoading)
+    // console.log(isLoading)
     return <h2>Loading</h2>
   }
 

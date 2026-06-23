@@ -57,7 +57,7 @@ def ai_tutor_chat(request):
         },
         timeout=30,
     )
-
+    
     result = response.json()
     answer = result["choices"][0]["message"]["content"]
 

@@ -69,7 +69,7 @@ export const submitTaskAnswerApiRequest = async (
       {
         attempt_id: attemptId,
         task_id: taskId,
-        selected_option_ids: selectedOptionIds,
+        selected_options: selectedOptionIds,
         open_answer: openAnswer
       }
     )

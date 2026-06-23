@@ -1,0 +1,18 @@
+.messages {
+  
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  
+  font-size: var(--font-size-sm);
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.title {
+  align-self: center;
+  justify-content: center;
+}
+.typing {
+  font-weight: var(--font-weight-semibold);
+}

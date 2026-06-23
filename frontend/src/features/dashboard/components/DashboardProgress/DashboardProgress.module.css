@@ -27,7 +27,7 @@
 
   background: conic-gradient(
     var(--color-primary) calc(var(--value) * 1%),
-    var(--color-bg) 0
+    var(--color-bg-primary) 0
   );
 
   display: flex;

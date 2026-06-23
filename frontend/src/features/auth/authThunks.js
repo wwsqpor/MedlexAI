@@ -119,13 +119,13 @@ export const initializeAuth = createAsyncThunk(
       storage.setItem("refresh", newRefresh);
       thunkApi.dispatch(setAccessToken(access));
 
-      const userApiResponseData = await userApiRequest(access);
+      // const userApiResponseData = await userApiRequest(access);
 
-      await thunkApi.dispatch(fetchProfile()).unwrap()
+      // await thunkApi.dispatch(fetchProfile()).unwrap()
 
       return {
         accessToken: access,
-        user: userApiResponseData
+        // user: userApiResponseData
       }
 
     } catch (error) {

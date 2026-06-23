@@ -4,6 +4,7 @@ import profileReducer from "../features/profile/profileSlice.js"
 import dashboardReducer from "../features/dashboard/dashboardSlice.js"
 import casesReducer from "../features/cases/casesSlice.js"
 import userCasesReducer from "../features/userCases/userCasesSlice.js"
+import aiTutorReducer from "../features/aiTutor/aiTutorSlice.js"
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   profile: profileReducer,
   dashboard: dashboardReducer,
   cases: casesReducer,
-  userCases: userCasesReducer
+  userCases: userCasesReducer,
+  aiTutor: aiTutorReducer 
 })
 
 

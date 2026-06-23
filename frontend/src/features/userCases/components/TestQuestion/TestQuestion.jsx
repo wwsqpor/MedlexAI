@@ -14,9 +14,16 @@ export default function TestQuestion({
 }) {
 
   
-  const { currentTask: task, currentTaskAnswer: taskAnswer } = useTask();
+  const { currentTask: task, currentTaskAnswer: taskAnswer, submitTaskAnswer } = useTask();
 
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(taskAnswer?.selected_options?.[0]);
+
+  const handleSubmit = () => {
+    // console.log(selectedOption)
+    submitTaskAnswer({
+      selectedOptionsIds: [selectedOption]
+    })
+  }
 
 
   return (
@@ -32,10 +39,16 @@ export default function TestQuestion({
               <label className={styles.option} htmlFor={item.id}>
                 <input
                   id={item.id}
-                  className={styles.radio}
+                  className={`
+                    ${styles.radio} 
+                    ${taskAnswer?.is_correct && taskAnswer?.selected_options?.[0] === item.id 
+                      ? styles.correct 
+                      : styles.incorrect
+                    }`}
                   type="radio"
                   checked={selectedOption === item.id}
-                  onChange={() => setSelectedOption(item.id)}
+                  onChange={async () => await setSelectedOption(item.id)}
+                  disabled={taskAnswer?.selected_options?.[0] ? true : false}
                 />
 
                 <span className={styles["option-text"]}>
@@ -46,8 +59,24 @@ export default function TestQuestion({
             </li>
           ))}
         </ul>
+        <Button
+          onClick={handleSubmit}
+          disabled={taskAnswer?.selected_options?.[0] ? true : false}
+        >
+          Проверить
+        </Button>
       </div>
-      
+      { taskAnswer && 
+        <div className={`${styles["ai-feedback"]} ${taskAnswer?.is_correct 
+          ? styles["ai-feedback__correct"] 
+          : styles["ai-feedback__incorrect"]}`
+        }>
+          <h5>Объяснение</h5>
+          <p>
+            {taskAnswer?.ai_feedback}
+          </p>
+        </div>
+      }
     </Box>
   )
 }
