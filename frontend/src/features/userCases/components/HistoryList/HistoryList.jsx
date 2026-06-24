@@ -1,6 +1,8 @@
 import { useUserCaseSessions } from "../../hooks"
 
 import HistoryCard from "../HistoryCard/HistoryCard"
+import Loader from "../../../../components/Loader/Loader"
+
 import styles from "./HistoryList.module.css"
 
 
@@ -9,7 +11,7 @@ export default function HistoryList() {
   const { userCaseSessions, isLoading } = useUserCaseSessions()
 
   if (isLoading) {
-    return <h2>Loading</h2>
+    return <Loader />
   }
 
 

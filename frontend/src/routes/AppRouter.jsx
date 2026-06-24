@@ -15,6 +15,7 @@ import CasesLibrary from '../features/cases/components/CasesLibrary/CasesLibrary
 import CasesHistory from '../features/userCases/components/CasesHistory/CasesHistory.jsx';
 import CaseSessionPage from '../pages/CaseSessionPage/CaseSessionPage.jsx';
 import CaseSessionTaskPage from "../pages/CaseSessionTaskPage/CaseSessionTaskPage.jsx"
+import CaseSessionResultPage from '../pages/CaseSessionResultPage/CaseSessionResultPage.jsx';
 import AiTutorPage from '../pages/AITutorPage/AITutorPage.jsx';
 // import MainLayout from '../layouts/MainLayout/MainLayout.jsx';
 
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
                   {
                     path: "tasks/:taskId",
                     Component: CaseSessionTaskPage
+                  },
+                  {
+                    path: "result",
+                    Component: CaseSessionResultPage,
                   }
                 ]
               },

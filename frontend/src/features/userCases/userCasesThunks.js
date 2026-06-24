@@ -5,7 +5,8 @@ import {
   startUserCaseSessionApiRequest,
   fetchUserCaseSessionDetailsApiRequest,
   fetchCaseTasksApiRequest,
-  submitTaskAnswerApiRequest
+  submitTaskAnswerApiRequest,
+  completeUserCaseSessionApiRequest
 } from "./api/userCasesApi"
 
 
@@ -100,6 +101,58 @@ export const submitAnswer = createAsyncThunk(
     } catch (error) {
       return thunkApi.rejectWithValue(
         error?.response?.data?.message ?? "Failed to fetch case tasks"
+      )
+    }
+  }
+)
+
+export const completeCase = createAsyncThunk(
+  "userCases/completeCase",
+
+  async (sessionId, { getState, dispatch, thunkApi }) => {
+    try {
+      const state = getState();
+
+      const answers = Object.values(
+        state.userCases.userAnswers
+      )
+      
+      await Promise.all(
+        answers.map(answer => 
+          dispatch(
+            submitAnswer(
+              {
+                sessionId,
+                taskId: answer["task_id"],
+                selectedOptionsIds: answer["selected_option_ids"],
+                openAnswer: answer["open_answer"]
+              }
+            )
+          ).unwrap()
+        )
+      )
+      const response = await completeUserCaseSessionApiRequest(sessionId);
+
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(
+        error?.response?.data?.message ?? "Failed to fetch case result"
+      )
+    }
+  }
+)
+
+export const fetchUserCaseSessionResult = createAsyncThunk(
+  "userCases/fetchUserCaseSessionResult",
+
+  async (sessionId, { thunkApi }) => {
+    try {
+      const response = await completeUserCaseSessionApiRequest(sessionId);
+
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(
+        error?.response?.data?.message ?? "Failed to fetch case result"
       )
     }
   }

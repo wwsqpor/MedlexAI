@@ -7,8 +7,9 @@ import {
 
 const initialState = {
   user: null,
+  userStatus: "idle",
+
   stats: null,
-  isLoading: false,
   error: ""
 }
 
@@ -20,7 +21,7 @@ const profileSlice = createSlice({
     clearProfile(state) {
       state.user = null;
       state.stats = null;
-      state.isLoading = false;
+      state.userStatus = "idle";
       state.error = ""
     },
     clearError(state) {
@@ -31,28 +32,28 @@ const profileSlice = createSlice({
     builder
 
     .addCase(fetchProfile.pending, (state) => {
-      state.isLoading = true;
+      state.userStatus = "loading";
       state.error = "";
     })
     .addCase(fetchProfile.rejected, (state, action) => {
-      state.isLoading = false;
+      state.userStatus = "failed";
       state.error = action.payload;
     })
     .addCase(fetchProfile.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = "";
+      state.userStatus = "succeeded";
       state.user = action.payload;
+      state.error = "";
     })
     .addCase(updateProfile.pending, (state) => {
-      state.isLoading = true;
+      state.userStatus = "loading";
       state.error = "";
     })
     .addCase(updateProfile.rejected, (state, action) => {
-      state.isLoading = false;
+      state.userStatus = "failed";
       state.error = action.payload;
     })
     .addCase(updateProfile.fulfilled, (state, action) => {
-      state.isLoading = false;
+      state.userStatus = "succeeded";
       state.user = action.payload;
     })
   }

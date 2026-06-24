@@ -5,10 +5,11 @@ import {
   selectCurrentSession,
   selectCurrentSessionStatus,
   selectSubmitAnswerStatus,
-  selectTaskAnswer
+  selectTaskAnswer,
+  selectUserAnswers,
 } from "../userCasesSelectors"
 import { fetchUserCaseSessionDetails, submitAnswer } from "../userCasesThunks";
- 
+import { addAnswer } from "../userCasesSlice"
 
 export default function useTask() {
 
@@ -19,10 +20,11 @@ export default function useTask() {
   const submitAnswerStatus = useAppSelector(selectSubmitAnswerStatus);
   const currentTask = currentSession.tasks[Number(taskId) - 1];
   const currentTaskAnswer = useAppSelector(state => selectTaskAnswer(state, currentTask.id))
+  const preSubmittedUserAnswers = useAppSelector(selectUserAnswers);
 
 
   const submitTaskAnswer = async (payload) => {
-    console.log("Payload: ", payload)
+    // console.log("Payload: ", payload)
     await dispatch(
       submitAnswer({
         sessionId: Number(sessionId),
@@ -33,12 +35,23 @@ export default function useTask() {
     dispatch(fetchUserCaseSessionDetails(Number(sessionId)));
   }
 
+  const saveAnswer = (payload) => {
+    dispatch(addAnswer({
+      attempt_id: Number(sessionId),
+      task_id: currentTask.id,
+      ...payload
+    }))
+  }
+
   return {
-    sessionId,
+    sessionId: Number(sessionId),
+    taskId,
     currentTask,
     submitTaskAnswer,
     submitAnswerStatus,
-    currentTaskAnswer
+    currentTaskAnswer,
+    saveAnswer,
+    preSubmittedUserAnswers,
   }
 
 }

@@ -4,7 +4,6 @@ import { useTask } from "../../hooks";
 
 import Box from "../../../../components/Box/Box"
 import Button from "../../../../components/Button/Button"
-import Input from "../../../../components/Input/Input"
 
 import styles from "./TestQuestion.module.css"
 
@@ -14,17 +13,30 @@ export default function TestQuestion({
 }) {
 
   
-  const { currentTask: task, currentTaskAnswer: taskAnswer, submitTaskAnswer } = useTask();
+  const { 
+    sessionId,
+    currentTask: task, 
+    currentTaskAnswer: taskAnswer, 
+    submitTaskAnswer,
+    saveAnswer,
+    preSubmittedUserAnswers, 
+  } = useTask();
 
-  const [selectedOption, setSelectedOption] = useState(taskAnswer?.selected_options?.[0]);
-
-  const handleSubmit = () => {
-    // console.log(selectedOption)
-    submitTaskAnswer({
-      selectedOptionsIds: [selectedOption]
-    })
+  // const [selectedOption, setSelectedOption] = useState(taskAnswer?.selected_options?.[0]);
+  const selectedOption =
+    taskAnswer?.selected_options?.[0] ??
+    preSubmittedUserAnswers[
+      `${sessionId}-${task?.id}`
+    ]?.selected_option_ids?.[0] ??
+    null;
+    
+  const handleChange = (value) => {
+    // debouncedSave(e.target.value);
+    saveAnswer({
+      selected_option_ids: [value]
+    });
   }
-
+  
 
   return (
     <Box className={styles["test-question-task"]}>
@@ -47,7 +59,7 @@ export default function TestQuestion({
                     }`}
                   type="radio"
                   checked={selectedOption === item.id}
-                  onChange={async () => await setSelectedOption(item.id)}
+                  onChange={() => handleChange(item.id)}
                   disabled={taskAnswer?.selected_options?.[0] ? true : false}
                 />
 
@@ -59,12 +71,6 @@ export default function TestQuestion({
             </li>
           ))}
         </ul>
-        <Button
-          onClick={handleSubmit}
-          disabled={taskAnswer?.selected_options?.[0] ? true : false}
-        >
-          Проверить
-        </Button>
       </div>
       { taskAnswer && 
         <div className={`${styles["ai-feedback"]} ${taskAnswer?.is_correct 

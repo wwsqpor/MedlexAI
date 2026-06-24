@@ -10,7 +10,7 @@ import styles from "./ChatInput.module.css";
 export default function ChatInput() {
   const [message, setMessage] = useState("");
 
-  const { sendMessage, isTyping } = useAITutor();
+  const { sendMessage } = useAITutor();
 
   const handleSubmit = async () => {
     if (!message.trim()) return;

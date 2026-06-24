@@ -23,9 +23,9 @@ export default function useUserCaseSessions() {
 
   useEffect(() => {
 
-    if (status === "idle") {
+    // if (status === "idle") {
       dispatch(fetchUserCaseSessions())
-    }
+    // }
   }, [])
 
   return {

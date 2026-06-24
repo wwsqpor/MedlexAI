@@ -37,7 +37,7 @@ export default function HistoryCard({
           </span>
           <span className={styles["result-date"]}>
             {caseData.completed_at 
-            ? new Date(caseData.case.completed_at).toLocaleDateString('ru-RU', {
+            ? new Date(caseData.completed_at).toLocaleDateString('ru-RU', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric'

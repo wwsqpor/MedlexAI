@@ -23,6 +23,7 @@
   /* width: 52px;
   height: 52px; */
   /* color: green; */
+  flex-shrink: 0;
 }
 
 .info-card__data-container {
@@ -57,7 +58,7 @@
 
 .value-long-text {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-regular);
   min-width: 0;
 }
 

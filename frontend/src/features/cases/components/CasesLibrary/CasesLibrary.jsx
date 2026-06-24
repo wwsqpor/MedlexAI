@@ -8,6 +8,7 @@ import CasesSearch from "../CasesSearch/CasesSearch"
 import CasesSort from "../CasesSort/CasesSort"
 import CasesList from "../CasesList/CasesList"
 import CaseDrawer from "../CaseDrawer/CaseDrawer"
+import Loader from "../../../../components/Loader/Loader"
 
 import styles from "./CasesLibrary.module.css"
 
@@ -30,7 +31,7 @@ export default function CasesLibrary() {
   } = useCasesFilters()
 
   if (casesStatus === "loading" || categoriesStatus === "loading") {
-    return <h2>Loading</h2>
+    return <Loader />
   }
 
   return (

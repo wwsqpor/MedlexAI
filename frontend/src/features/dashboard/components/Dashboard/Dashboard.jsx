@@ -5,6 +5,7 @@ import DashboardHeader from "../DashboardHeader/DashboardHeader"
 import DashboardInfoCard from "../DashboardInfoCard/DashboardInfoCard";
 import DashboardCase from "../DashboardCase/DashboardCase";
 import DashboardProgress from "../DashboardProgress/DashboardProgress";
+import Loader from "../../../../components/Loader/Loader";
 
 import DocumentFileIcon from "../../../../assets/icons/document-file.svg?react"
 import IncreaseIcon from "../../../../assets/icons/increase.svg?react"
@@ -20,8 +21,10 @@ export default function Dashboard() {
   const { stats, continueCase, progress, isLoading } = useDashboard();
 
   if (isLoading || !stats) {
-    return <h1>Loading</h1>
+    return <Loader className={styles.loader}/>
   }
+
+  // return <Loader />
 
   return (
     <div className={styles["dashboard-page"]}>

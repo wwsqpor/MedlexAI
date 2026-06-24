@@ -11,15 +11,15 @@
   padding-left: var(--space-4);
 }
 
-.AI, .student {
+.assistant, .user {
 }
 
-.AI {
+.assistant {
   align-self: flex-start;
   background-color: var(--color-blue-light);
 }
 
-.student {
+.user {
   align-self: flex-end;
   background-color: var(--color-success-secondary);
 }

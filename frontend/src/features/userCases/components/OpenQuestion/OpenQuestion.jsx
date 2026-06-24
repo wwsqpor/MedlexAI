@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { useTask } from "../../hooks";
 
@@ -6,6 +6,7 @@ import Box from "../../../../components/Box/Box"
 import Button from "../../../../components/Button/Button"
 
 import styles from "./OpenQuestion.module.css"
+import { debounce } from "../../../../utils/debounce";
 
 
 export default function OpenQuestion({
@@ -13,10 +14,39 @@ export default function OpenQuestion({
 }) {
 
   
-  const { currentTask: task, submitTaskAnswer, currentTaskAnswer: taskAnswer, submitAnswerStatus } = useTask();
+  const { 
+    currentTask: task,
+    currentTaskAnswer: taskAnswer, 
+    sessionId,
+    submitAnswerStatus,
+    saveAnswer,
+    preSubmittedUserAnswers,
+  } = useTask();
   
-  const [answer, setAnswer] = useState(taskAnswer?.open_answer ? taskAnswer?.open_answer : "");
+  const answer =
+    taskAnswer?.open_answer ??
+    preSubmittedUserAnswers[
+      `${sessionId}-${task?.id}`
+    ]?.open_answer ??
+    "";
 
+  // const debouncedSave = useMemo(
+  //   () => (
+  //     debounce((value) => {
+  //       saveAnswer({
+  //         open_answer: value
+  //       });
+  //     }, 500)
+  //   )
+  // , [saveAnswer])
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    // debouncedSave(e.target.value);
+    saveAnswer({
+      open_answer: e.target.value
+    });
+  }
 
   return (
     <Box className={styles["open-question-task"]}>
@@ -24,26 +54,21 @@ export default function OpenQuestion({
 
         <h4>Открытый опрос</h4>
         <p>{ task.title }</p>
+        <p className={styles.instruction}>{ task.instruction }</p>
         <textarea 
           className={styles.input}
           name="answer" 
           id="answer"
           placeholder="Введите ваш ответ..."
           value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
+          onChange={handleChange}
           disabled={taskAnswer?.open_answer ? true : ""}
           />
       </div>
-      <Button
-        onClick={async () => await submitTaskAnswer({ openAnswer: answer })}
-        disabled={taskAnswer?.open_answer ? true : ""}
-      >
-        Проверить
-      </Button>
       {taskAnswer && 
       <>
         <div className={styles.correct}>
-          <h4>Правильный ответ</h4>
+          <h4>Ответ ИИ</h4>
           <p>{ taskAnswer.ai_correct_answer }</p>
         </div>
         <div className={styles.feedback}>

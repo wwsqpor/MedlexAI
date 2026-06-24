@@ -7,9 +7,18 @@ import styles from "./CaseSessionProgress.module.css"
 export default function CaseSessionProgress() {
 
   const { sessionId, taskId } = useParams();
-  const currentIndex = Number(taskId) - 1;
+  const isResultPage = taskId === undefined;
+  const currentIndex = isResultPage ? 4 : Number(taskId) - 1;
 
   const navigate = useNavigate();
+  const handleClick = (value) => {
+    if (value === 4) {
+      // if ()
+      navigate(`/cases/sessions/${sessionId}/result`);
+      return;
+    }
+    navigate(`/cases/sessions/${sessionId}/tasks/${value}`);
+  }
 
   return (
     <div className={styles["progress"]}>
@@ -23,7 +32,7 @@ export default function CaseSessionProgress() {
               : ""
             }
           `}
-          onClick={() => navigate(`/cases/sessions/${sessionId}/tasks/${value}`)}
+          onClick={() => handleClick(value)}
         >
           { value }
         </div>

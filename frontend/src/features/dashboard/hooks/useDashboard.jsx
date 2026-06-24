@@ -28,7 +28,7 @@ export default function useDashboard() {
   const error = useAppSelector(selectError);
 
   useEffect(() => {
-    console.log(status);
+    // console.log(status);
     if (status === "idle") {
       dispatch(fetchDashboard())
     }

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react"
+import { useNavigate } from "react-router-dom"
 
 import { useProfile } from "../../../features/profile/hooks";
 import { useAppDispatch } from "../../../app/hooks";
@@ -18,6 +19,8 @@ export default function UserMenu() {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
@@ -31,7 +34,8 @@ export default function UserMenu() {
   }, [])
 
   const handleLogout = async () => {
-    await dispatch(logout())
+    await dispatch(logout());
+    navigate("/login");
   }
 
   return (
@@ -50,8 +54,8 @@ export default function UserMenu() {
         <Box className={`${styles.dropdown} ${open ? styles.open : ""}`}>
           <nav>
             <ul className={styles["dropdown-list"]}>
-              <li><Link to="/profile" className={`${styles["nav-btn"]} ${styles["btn-reset"]}`}>Profile</Link></li>
-              <li><Button onClick={handleLogout} className={`${styles["nav-btn"]} ${styles["btn-reset"]} ${styles["log-out"]}`}>Log out</Button></li>
+              <li><Link to="/profile" className={`${styles["nav-btn"]} ${styles["btn-reset"]}`}>Профиль</Link></li>
+              <li><Button onClick={handleLogout} className={`${styles["nav-btn"]} ${styles["btn-reset"]} ${styles["log-out"]}`}>Выйти</Button></li>
             </ul>
           </nav>
         </Box>

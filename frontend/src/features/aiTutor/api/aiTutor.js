@@ -11,3 +11,10 @@ export const askAiApiRequest = async (message) => {
   // console.log(response)
   return response.data;
 }
+
+export const fetchChatHistoryApiRequest = async () => {
+  const response = await api.get(
+    "ai-tutor/history/"
+  )
+  return response.data;
+}

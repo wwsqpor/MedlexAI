@@ -5,16 +5,16 @@ import Button from "../../../../components/Button/Button"
 import styles from "./PersonalInformation.module.css"
 import { useProfile } from "../../hooks"
 import { formatPhone } from "../../../../utils"
+import Loader from "../../../../components/Loader/Loader"
 
 
 export default function PersonalInformation() {
 
   const navigate = useNavigate();
-  const { user, isLoading } = useProfile();
+  const { user, userStatus } = useProfile();
 
-  if (isLoading) {
-    // console.log(isLoading)
-    return <h2>Loading</h2>
+  if (userStatus === "loading") {
+    return <Loader />
   }
 
   return (

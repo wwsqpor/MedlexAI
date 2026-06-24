@@ -76,7 +76,7 @@ export const submitTaskAnswerApiRequest = async (
     return response.data;
 }
 
-export const completeUserCaseSession = async (sessionId) => {
+export const completeUserCaseSessionApiRequest = async (sessionId) => {
   const response = await api.post(
     "cases/complete-case/",
     {

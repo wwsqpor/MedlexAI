@@ -41,8 +41,8 @@ export default function DashboardInfoCard({
       </div>
       <div className={styles["info-card__data-container"]}>
         <h4 className={`${styles.title}`}>{ title }</h4>
-        <p className={`${String(value).length > 4 ? styles["value-long-text"] : styles.value}`}> { value }</p>
-        <span className={`${styles[trendColor]} ${styles.trend}`}>{ trend }</span>
+        <p className={`${String(value).length > 4 ? styles["value-long-text"] : styles.value}`}> { value.length > 30 ? `${value.slice(0, 30)}...` : value }</p>
+        <span className={`${styles[trendColor]} ${styles.trend}`}>{ trend?.length > 30 ? `${trend.slice(0, 30)}...` : trend }</span>
       </div>
     </Box>
   )

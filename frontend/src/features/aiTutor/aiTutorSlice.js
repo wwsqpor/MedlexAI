@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 import { 
-  askAi
+  askAi,
+  fetchChatHistory
 } from "./aiTutorThunks"
 
 
 const initialState = {
   messages: [],
+  messagesStatus: "idle",
+  messagesError: "",
 
   sendMessageStatus: "idle",
   sendMessageError: "",
@@ -38,6 +41,18 @@ const aiTutor = createSlice({
       state.sendMessageStatus = "succeeded";
       state.messages.push(action.payload);
       state.isTyping = false;
+    })
+    .addCase(fetchChatHistory.pending, (state) => {
+      state.messagesStatus = "loading";
+      state.messagesError = "";
+    })
+    .addCase(fetchChatHistory.rejected, (state, action) => {
+      state.messagesStatus = "failed";
+      state.messagesError = action.payload;
+    })
+    .addCase(fetchChatHistory.fulfilled, (state, action) => {
+      state.messagesStatus = "succeeded";
+      state.messages = action.payload;
     })
   }
 })

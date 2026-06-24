@@ -1,5 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 
+import { useCompleteCase } from "../../hooks"
+
 import Button from "../../../../components/Button/Button"
 
 import styles from "./CaseSessionNavigation.module.css"
@@ -10,17 +12,29 @@ export default function CaseSessionNavigation() {
   const navigate = useNavigate();
   const { sessionId, taskId } = useParams();
   const currentTask = Number(taskId);
+  const isResultPage = taskId === undefined ? true : false;
+
+  const { complete } = useCompleteCase();
 
   const goBack = () => {
     if (currentTask === 1) {
       navigate("/dashboard");
       return;
     }
+    if (!taskId) {
+      navigate(`/cases/sessions/${sessionId}/tasks/3`);
+      return;
+    }
     navigate(`/cases/sessions/${sessionId}/tasks/${currentTask - 1}`)
   }
 
-  const goNext = () => {
+  const goNext = async () => {
     if (currentTask === 3) {
+      await complete()
+      return;
+    }
+    if (isResultPage) {
+      navigate("/dashboard");
       return;
     }
     navigate(`/cases/sessions/${sessionId}/tasks/${currentTask + 1}`)
@@ -39,7 +53,7 @@ export default function CaseSessionNavigation() {
         className={`${styles.btn} ${styles.next}`}
 
       >
-        {currentTask === 3 ? "Завершить" : "Далее"}
+        {isResultPage ? "Главная" : currentTask === 3 ? "Завершить" : "Далее"}
       </Button>
     </div>
   )

@@ -126,7 +126,6 @@ export default function LoginForm() {
             credential: response.credential,
             rememberMe: true
           }))
-          console.log(response);
           if (googleLogin.fulfilled.match(result)) {
             navigate("/profile");
           }

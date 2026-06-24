@@ -121,7 +121,7 @@ export const initializeAuth = createAsyncThunk(
 
       // const userApiResponseData = await userApiRequest(access);
 
-      // await thunkApi.dispatch(fetchProfile()).unwrap()
+      await thunkApi.dispatch(fetchProfile()).unwrap()
 
       return {
         accessToken: access,

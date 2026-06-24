@@ -4,16 +4,26 @@ import {
   fetchUserCaseSessions,
   startUserCaseSession,
   fetchUserCaseSessionDetails,
-  submitAnswer
+  submitAnswer,
+  completeCase,
+  fetchUserCaseSessionResult
   // fetchUserCaseSessionTasks
 } from "./userCasesThunks";
 
 
 const initialState = {
   userCaseSessions: [],
+
   currentSession: null,
   currentSessionStatus: "idle",
+  
   submitAnswerStatus: "idle",
+
+  userAnswers: {},
+
+  result: null,
+  resultStatus: "idle",
+
   status: "idle",
   error: ""
 }
@@ -23,7 +33,11 @@ const userCases = createSlice({
   initialState,
 
   reducers: {
-
+    addAnswer: (state, action) => {
+      const { attempt_id, task_id } = action.payload;
+      console.log(action.payload);
+      state.userAnswers[`${attempt_id}-${task_id}`] = action.payload;
+    }
   },
 
   extraReducers: (builder) => {
@@ -76,8 +90,33 @@ const userCases = createSlice({
       state.submitAnswerStatus = "succeeded";
       // state.currentSession.answers.push(action.payload);
     })
+    .addCase(completeCase.pending, (state) => {
+      state.resultStatus = "loading";
+      state.error = "";
+    })
+    .addCase(completeCase.rejected, (state, action) => {
+      state.resultStatus = "failed";
+      state.error = action.payload;
+    })
+    .addCase(completeCase.fulfilled, (state, action) => {
+      state.resultStatus = "succeeded";
+      state.result = action.payload;
+    })
+    .addCase(fetchUserCaseSessionResult.pending, (state) => {
+      state.resultStatus = "loading";
+      state.error = "";
+    })
+    .addCase(fetchUserCaseSessionResult.rejected, (state, action) => {
+      state.resultStatus = "failed";
+      state.error = action.payload;
+    })
+    .addCase(fetchUserCaseSessionResult.fulfilled, (state, action) => {
+      state.resultStatus = "succeeded";
+      state.result = action.payload;
+    })
   }
 })
 
 
 export default userCases.reducer;
+export const { addAnswer } = userCases.actions; 

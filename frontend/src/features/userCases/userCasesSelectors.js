@@ -30,3 +30,9 @@ export const selectSubmitAnswerStatus = (state) => state.userCases.submitAnswerS
 export const selectTaskAnswer = (state, taskId) => state.userCases.currentSession.answers.find(
   a => a.task === taskId
 )
+
+export const selectUserAnswers = (state) => state.userCases.userAnswers;
+
+export const selectResult = (state) => state.userCases.result;
+
+export const selectResultStatus = (state) => state.userCases.resultStatus;

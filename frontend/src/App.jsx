@@ -4,7 +4,6 @@ import { router } from './routes/AppRouter.jsx'
 
 import { useAppDispatch } from "./app/hooks";
 import { initializeAuth } from "./features/auth/authThunks.js";
-import { fetchProfile } from "./features/profile/profileThunks.js";
 
 
 export default function App() {
@@ -12,7 +11,7 @@ export default function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(initializeAuth()).unwrap().then(() => dispatch(fetchProfile()))
+    dispatch(initializeAuth()).unwrap()
     console.log("initialize auth");
   }, [])
 
