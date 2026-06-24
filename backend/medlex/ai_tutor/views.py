@@ -13,24 +13,9 @@ def ai_tutor_chat(request):
     message = request.data.get("message", "")
     message_lower = message.strip().lower()
 
-    simple_answers = {
-    "привет": "Привет! Чем могу помочь?",
-    "здравствуй": "Здравствуйте! Чем могу помочь?",
-    "как дела": "Все хорошо 😊 А у тебя как?",
-    "спасибо": "Пожалуйста! Если появятся вопросы — обращайся.",
-    "доброе утро": "Доброе утро! Чем могу помочь?",
-    "добрый день": "Добрый день! Чем могу помочь?",
-    "добрый вечер": "Добрый вечер! Чем могу помочь?",
-}
-
-    if message_lower in simple_answers:
-        return Response({
-        "answer": simple_answers[message_lower]
-    })
-
     if not message.strip():
         return Response({"error": "Сообщение пустое"}, status=400)
-    session, created = ChatSession.objects.get_or_create(
+    session, _ = ChatSession.objects.get_or_create(
         user=request.user,
         title="Мой чат"
 )
@@ -39,7 +24,33 @@ def ai_tutor_chat(request):
         session=session,
         role="user",
         content=message
-)
+) 
+    simple_answers = {
+        "привет": "Привет! Чем могу помочь?",
+        "здравствуй": "Здравствуйте! Чем могу помочь?",
+        "как дела": "Все хорошо 😊 А у тебя как?",
+        "спасибо": "Пожалуйста! Если появятся вопросы — обращайся.",
+        "доброе утро": "Доброе утро! Чем могу помочь?",
+        "добрый день": "Добрый день! Чем могу помочь?",
+        "добрый вечер": "Добрый вечер! Чем могу помочь?",
+    }
+
+    if message_lower in simple_answers:
+        answer = simple_answers[message_lower]
+
+        ChatMessage.objects.create(
+            session=session,
+            role="assistant",
+            content=answer
+        )
+
+        return Response({
+            "answer": answer
+        })
+
+
+
+
     law_context = search_law(message)
 
     prompt = f"""
@@ -89,6 +100,8 @@ def ai_tutor_chat(request):
 Ответ: Я могу помочь с вопросами по медицинскому праву, медицине и обучению, а также ответить на общие вопросы.
 
 Не используй китайские символы.
+
+Не используй - "Похоже, что вы просто сказали "хорошо понятно" и не задали конкретный вопрос. Если так, то я отвечу соответствующим образом:", сразу перейди к сообщения 
 """
     
     history = ChatMessage.objects.filter(
@@ -136,4 +149,25 @@ def ai_tutor_chat(request):
 
     return Response({
         "answer": answer
+    })
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def ai_tutor_history(request):
+    session = ChatSession.objects.filter(user=request.user).first()
+
+    if not session:
+        return Response({"messages": []})
+
+    messages = ChatMessage.objects.filter(session=session).order_by("created_at")
+
+    return Response({
+        "messages": [
+            {
+                "role": msg.role,
+                "content": msg.content,
+                "created_at": msg.created_at
+            }
+            for msg in messages
+        ]
     })
