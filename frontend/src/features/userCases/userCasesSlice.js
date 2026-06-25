@@ -68,15 +68,25 @@ const userCases = createSlice({
     })
     .addCase(fetchUserCaseSessionDetails.pending, (state) => {
       state.currentSessionStatus = "loading";
+      state.resultStatus = "loading";
       state.error = "";
     })
     .addCase(fetchUserCaseSessionDetails.rejected, (state, action) => {
       state.currentSessionStatus = "failed";
+      state.resultStatus = "failed";
       state.error = action.payload;
     })
     .addCase(fetchUserCaseSessionDetails.fulfilled, (state, action) => {
       state.currentSessionStatus = "succeeded";
       state.currentSession = action.payload;
+      state.result = {
+        attempt_id: action.payload.id,
+        case: action.payload.case.title,
+        total_score: action.payload.total_score,
+        status: action.payload.status,
+        completed_at: action.payload.completed_at,
+      }
+      state.resultStatus = "succeeded";
     })
     .addCase(submitAnswer.pending, (state) => {
       state.submitAnswerStatus = "loading";

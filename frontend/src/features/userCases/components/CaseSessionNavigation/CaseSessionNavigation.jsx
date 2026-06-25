@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 
-import { useCompleteCase } from "../../hooks"
+import { useCompleteCase, useCaseResult } from "../../hooks"
 
 import Button from "../../../../components/Button/Button"
 
@@ -14,6 +14,7 @@ export default function CaseSessionNavigation() {
   const currentTask = Number(taskId);
   const isResultPage = taskId === undefined ? true : false;
 
+  const { resultStatus } = useCaseResult();
   const { complete } = useCompleteCase();
 
   const goBack = () => {
@@ -38,6 +39,10 @@ export default function CaseSessionNavigation() {
       return;
     }
     navigate(`/cases/sessions/${sessionId}/tasks/${currentTask + 1}`)
+  }
+
+  if (resultStatus === "loading") {
+    return null;
   }
 
   return (

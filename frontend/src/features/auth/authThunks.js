@@ -147,7 +147,7 @@ export const initializeAuth = createAsyncThunk(
         console.error("Non-axios error: ", error);
       }
       return thunkApi.rejectWithValue(
-        `Refresh token obtain failed: ${error.response.data || "unknown error"}`
+        error.response?.data || error.message || "Unknown error"
       )
     }
   }

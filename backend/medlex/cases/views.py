@@ -232,7 +232,7 @@ def check_open_answer_with_ai(task, student_answer):
 
 Верни строго JSON:
 {{
-  "score": 0,
+  "score": от 0 до 100,
   "feedback": "короткий комментарий",
   "correct_answer": "пример правильного ответа",
   "what_is_correct": ["что студент написал правильно"],
@@ -416,3 +416,4 @@ def complete_case(request):
         "status": attempt.status,
         "completed_at": attempt.completed_at,
     })
+

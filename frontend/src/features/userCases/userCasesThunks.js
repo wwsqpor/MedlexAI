@@ -6,7 +6,8 @@ import {
   fetchUserCaseSessionDetailsApiRequest,
   fetchCaseTasksApiRequest,
   submitTaskAnswerApiRequest,
-  completeUserCaseSessionApiRequest
+  completeUserCaseSessionApiRequest,
+  fetchUserCaseSessionResultApiRequest  
 } from "./api/userCasesApi"
 
 
@@ -116,7 +117,7 @@ export const completeCase = createAsyncThunk(
       const answers = Object.values(
         state.userCases.userAnswers
       )
-      
+
       await Promise.all(
         answers.map(answer => 
           dispatch(
@@ -131,8 +132,12 @@ export const completeCase = createAsyncThunk(
           ).unwrap()
         )
       )
+      
+      
       const response = await completeUserCaseSessionApiRequest(sessionId);
-
+      dispatch(
+        fetchUserCaseSessionDetails(Number(sessionId))
+      );
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(
@@ -147,8 +152,7 @@ export const fetchUserCaseSessionResult = createAsyncThunk(
 
   async (sessionId, { thunkApi }) => {
     try {
-      const response = await completeUserCaseSessionApiRequest(sessionId);
-
+      const response = await fetchUserCaseSessionResultApiRequest(sessionId);
       return response;
     } catch (error) {
       return thunkApi.rejectWithValue(

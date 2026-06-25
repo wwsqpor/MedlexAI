@@ -85,3 +85,12 @@ export const completeUserCaseSessionApiRequest = async (sessionId) => {
   )
   return response.data;
 }
+
+export const fetchUserCaseSessionResultApiRequest = async (sessionId) => {
+  const response = await api.get(
+    `cases/attempts/${sessionId}/result/`,
+  )
+  console.log(sessionId)
+  console.log(response)
+  return response.data;
+}

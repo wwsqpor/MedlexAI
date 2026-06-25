@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 import { useCurrentUserCaseSession } from "../../hooks"
 
@@ -18,16 +18,12 @@ export default function CaseSessionLayout() {
     currentSessionStatus
   } = useCurrentUserCaseSession();
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (currentSessionStatus === "failed") {
-      navigate("/cases");
-    }
-  }, [currentSessionStatus, navigate])
-
   if (currentSessionStatus === "loading" || currentSessionStatus === "idle") {
     return <Loader />
+  }
+ 
+  if (currentSessionStatus === "failed") {
+    return <Navigate to="/cases" />
   }
 
 

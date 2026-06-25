@@ -1,19 +1,24 @@
 import { Fragment } from "react";
 import { useParams, useNavigate } from "react-router-dom"
 
+import { useCaseResult } from "../../hooks"
+
 import styles from "./CaseSessionProgress.module.css"
 
 
 export default function CaseSessionProgress() {
 
   const { sessionId, taskId } = useParams();
+  const { result } = useCaseResult();
   const isResultPage = taskId === undefined;
   const currentIndex = isResultPage ? 4 : Number(taskId) - 1;
 
   const navigate = useNavigate();
   const handleClick = (value) => {
     if (value === 4) {
-      // if ()
+      if (result.status === "in_progress") {
+        return;
+      }
       navigate(`/cases/sessions/${sessionId}/result`);
       return;
     }

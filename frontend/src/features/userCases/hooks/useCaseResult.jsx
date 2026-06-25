@@ -9,7 +9,7 @@ import {
   selectResultStatus,
 } from "../userCasesSelectors"
 import {
-  fetchUserCaseSessionResult
+  fetchUserCaseSessionDetails
 } from "../userCasesThunks"
 
 export default function useCaseResult() {
@@ -21,14 +21,10 @@ export default function useCaseResult() {
   const resultStatus = useAppSelector(selectResultStatus);
 
   useEffect(() => {
-    if (resultStatus === "idle") {
-      dispatch(
-        fetchUserCaseSessionResult(Number(sessionId))
-      );
-    }
-
-
-  }, [dispatch, sessionId])
+    // dispatch(
+    //   fetchUserCaseSessionDetails(Number(sessionId))
+    // );
+  }, [])
 
   return {
     result,
